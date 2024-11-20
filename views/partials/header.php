@@ -1,6 +1,8 @@
 <header id="navegationBar">
     <nav class="centerAlign">
-        <img class="logoImage" src="../resources/images/logo.png" alt="iLib Logo">
+        <a href="/">
+            <img class="logoImage" src="../../resources/images/logo.png" alt="iLib Logo">
+        </a>
         <a href="">Libreria</a>
         <li id="genresSM">
             <a href="">Generos ▼</a>
