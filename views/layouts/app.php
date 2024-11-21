@@ -2,15 +2,15 @@
 <html lang="es">
     <head>
         <?php 
-            include "head.php";
+            include "../partials/head.php";
             echo $extraResources;
         ?>
     </head>
     <body>
         <?php
-            include "header.php";
+            include "../partials/header.php";
             echo $content;
-            include "footer.php"; 
+            include "../partials/footer.php";
         ?>
     </body>
 </html>

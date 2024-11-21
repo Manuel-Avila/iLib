@@ -109,5 +109,5 @@
         </div>
     ';
 
-    include "../partials/layout.php";
+    include "../layouts/app.php";
 ?>
