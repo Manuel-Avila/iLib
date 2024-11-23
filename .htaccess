@@ -1,0 +1,6 @@
+Options +FollowSymLinks -MultiViews -Indexes
+RewriteEngine on
+
+# PAGES
+RewriteRule ^/?$ views/pages/index.php
+RewriteRule ^book/?$ views/pages/book.php

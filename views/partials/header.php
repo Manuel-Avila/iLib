@@ -1,7 +1,7 @@
 <header id="navegationBar">
     <nav class="centerAlign">
         <a href="/">
-            <img class="logoImage" src="../../public/resources/images/logo.png" alt="iLib Logo">
+            <img class="logoImage" src="<?= BASE_PATH ?>public/images/logo.png" alt="iLib Logo">
         </a>
         <a href="">Libreria</a>
         <li id="genresSM">

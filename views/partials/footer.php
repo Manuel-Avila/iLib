@@ -1,6 +1,6 @@
 <footer>
     <div>
-        <img alt="iLib logo" class="logoImage" src="../../public/resources/images/logo.png">
+        <img alt="iLib logo" class="logoImage" src="<?= BASE_PATH ?>public/images/logo.png">
         <h5>iLib</h5>
     </div>
 
