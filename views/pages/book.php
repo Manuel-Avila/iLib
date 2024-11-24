@@ -1,5 +1,20 @@
 <?php
-include "../../app/config.php";
+    include "../../app/config.php";
+
+   if (!isset($_GET['id'])) {
+        header('Location: /');
+    }
+
+    include_once "../../app/BooksController.php";
+
+    $bookController = new BooksController();
+    $book = $bookController->getBookById($_GET['id']);
+
+    if (empty($book)) {
+        header('Location: /');
+    }
+
+    $book = $book[0];
 ?>
 
 <!DOCTYPE html>
@@ -7,127 +22,141 @@ include "../../app/config.php";
 <html lang="es">
     <head>
         <?php include "../partials/head.php"; ?>
-        <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
     </head>
 
     <body>
     <?php include "../partials/header.php";?>
 
-    <main>
-        <section id="bookOptions">
-            <img alt="Imagen del libro" class="bookPortrait bookShadow hoverScale" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1524596540i/36124936.jpg">
-
-            <div class="bookType">
-                <select class="form-select redOutlined" style="margin: 0;">
-                    <option value="1" selected>Pasta Blanda</option>
-                    <option value="2">Pasta Dura</option>
-                    <option value="3">Digital</option>
-                </select>
+    <main class="book-details">
+        <div class="book-image">
+            <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="Portada del libro" id="bookCover">
+        </div>
+        <div class="book-info">
+            <span class="tag">Novedad</span>
+            <h1 id="bookTitle"><?= $book["title"] ?></h1>
+            <p class="author" id="bookAuthor"><?= $book["author"] ?></p>
+            <p class="editorial">Editorial: <span id="bookEditorial"><?= $book["editorial"] ?></span></p>
+            <div class="price-section">
+                <h2 class="price" id="bookPrice">$<?= $book["price"] ?></h2>
+            </div>
+            <div class="formats">
+                <button class="format-btn active">Tapa Blanda</button>
+                <button class="format-btn">Tapa Dura</button>
+                <button class="format-btn">eBook</button>
+            </div>
+            <div class="quantity">
+                <button class="qty-btn" id="decreaseQty">-</button>
+                <input type="number" id="quantity" value="1" min="1">
+                <button class="qty-btn" id="increaseQty">+</button>
+            </div>
+            <button class="add-to-cart">Agregar a mi bolsa</button>
+            <button class="favorite">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                Agregar a Favoritos
+            </button>
+            <button class="share">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                Compartir
+            </button>
+        </div>
+        <!-- Previous HTML remains the same until the end of the main product info -->
+        <div class="collapsible-sections">
+            <div class="collapsible">
+                <button class="collapse-btn" onclick="toggleSection('synopsis')">
+                    <span class="section-title">SINOPSIS</span>
+                    <span class="arrow">↓</span>
+                </button>
+                <div class="collapse-content" id="synopsis">
+                    <p><?= $book["description"] ?></p>
+                </div>
             </div>
 
-            <button class="button bookOptionB">Comprar</button>
-            <button class="outlineButton bookOptionB" id="wishList">Agregar a lista de deseos</button>
-        </section>
-
-        <section id="bookInfo">
-            <p class="bestSeller">Best Seller #246</p>
-            <h2>The Outsider</h2>
-            <h5 class="author">Stephen King</h5>
-            <div class="rating">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star unchecked"></span>
-                <h5>4.56</h5>
-                <p>329,282 ratings</p>
+            <div class="collapsible">
+                <button class="collapse-btn" onclick="toggleSection('characteristics')">
+                    <span class="section-title">CARACTERÍSTICAS</span>
+                    <span class="arrow">↓</span>
+                </button>
+                <div class="collapse-content" id="characteristics">
+                    <div class="characteristics-list">
+                        <div class="characteristic-item">
+                            <span class="characteristic-icon">📚</span>
+                            <span class="characteristic-label">Número de páginas:</span>
+                            <span class="characteristic-value"><?= $book["pages"] ?> páginas</span>
+                        </div>
+                        <div class="characteristic-item">
+                            <span class="characteristic-icon">📅</span>
+                            <span class="characteristic-label">Fecha de publicación:</span>
+                            <span class="characteristic-value"><?=$book["release_date"]?></span>
+                        </div>
+                        <div class="characteristic-item">
+                            <span class="characteristic-icon">📖</span>
+                            <span class="characteristic-label">ISBN:</span>
+                            <span class="characteristic-value"> <?= $book["isbn"] ?> </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>
-                An unspeakable crime. A confounding investigation. At a time when the King brand has never been stronger, he has delivered one of his most unsettling and compulsively readable stories.
-            </p>
-            <p>
-                An eleven-year-old boy’s violated corpse is found in a town park. Eyewitnesses and fingerprints point unmistakably to one of Flint City’s most popular citizens. He is Terry Maitland, Little League coach, English teacher, husband, and father of two girls. Detective Ralph Anderson, whose son Maitland once coached, orders a quick and very public arrest. Maitland has an alibi, but Anderson and the district attorney soon add DNA evidence to go with the fingerprints and witnesses. Their case seems ironclad.
-            </p>
-            <p>
-                As the investigation expands and horrifying answers begin to emerge, King’s propulsive story kicks into high gear, generating strong tension and almost unbearable suspense. Terry Maitland seems like a nice guy, but is he wearing another face? When the answer comes, it will shock you as only Stephen King can.
-            </p>
-            <h6>Generos:</h6>
-            <p>
-                <a href="#">Horror</a>,
-                <a href="#">Miedo</a>,
-                <a href="#">Suspenso</a>,
-                <a href="#">Ficcion</a>
-                <a href="#">...more</a>
-            </p>
-        </section>
+        </div>
     </main>
 
-    <section class="recommendations bookContainer">
-        <h2>Quizás también te interese:</h2>
-        <div class="flexWrap marginTop rowGap">
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://m.media-amazon.com/images/I/612y1xDU+lL._AC_UF1000,1000_QL80_.jpg">
-                <h5>The Exorcist</h5>
-                <p>William Peter Blatty</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.08</h6>
+    <div class="container-books-section">
+        <section class="book-section">
+            <div class="section-header">
+                <h2>Libros relacionados</h2>
+                <div class="scroll-buttons">
+                    <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                    <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
                 </div>
-            </a>
-
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1707490075i/204316865.jpg">
-                <h5>The Hitchcock Hotel</h5>
-                <p>Stephanie Wrobel</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.61</h6>
+            </div>
+            <div class="book-slider">
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 6">
+                    <h3>La ciudad de vapor</h3>
+                    <p class="author">Carlos Ruiz Zafón</p>
+                    <p class="price">$329.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
                 </div>
-            </a>
-
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1711386577i/208155307.jpg">
-                <h5>Midnight</h5>
-                <p>Margot Harrison</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.54</h6>
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 7">
+                    <h3>El infinito en un junco</h3>
+                    <p class="author">Irene Vallejo</p>
+                    <p class="price">$289.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
                 </div>
-            </a>
-
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713284232i/209419483.jpg">
-                <h5>Where They Last Saw Her</h5>
-                <p>Marcie R. Rendon</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>3.63</h6>
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 8">
+                    <h3>Línea de fuego</h3>
+                    <p class="author">Arturo Pérez-Reverte</p>
+                    <p class="price">$379.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
                 </div>
-            </a>
-
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1711205083i/208503280.jpg">
-                <h5>The Boyfriend</h5>
-                <p>Freida McFadden</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.89</h6>
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 9">
+                    <h3>Reina roja</h3>
+                    <p class="author">Juan Gómez-Jurado</p>
+                    <p class="price">$299.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
                 </div>
-            </a>
-
-            <a class="book" href="#">
-                <img alt="Recommended Book" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657781256i/61439040.jpg">
-                <h5>1984</h5>
-                <p>George Orwell</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.29</h6>
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 10">
+                    <h3>Sira</h3>
+                    <p class="author">María Dueñas</p>
+                    <p class="price">$349.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
                 </div>
-            </a>
-        </div>
-    </section>
+                <div class="book-card">
+                    <img src="../book.jpg" alt="Libro 5">
+                    <h3>Don Quijote de la Mancha</h3>
+                    <p class="author">Miguel de Cervantes</p>
+                    <p class="price">$399.00</p>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <?php include "../partials/footer.php"; ?>
+    <?php include "../partials/scripts.php"; ?>
     </body>
 </html>

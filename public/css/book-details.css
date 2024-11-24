@@ -1,0 +1,249 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.book-details {
+    display: grid;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    grid-template-columns: minmax(300px, 1fr) 2fr;
+    gap: 4rem;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-image {
+    padding: 2rem;
+}
+
+.book-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 2rem;
+}
+
+.tag {
+    background-color: #333;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+h1 {
+    margin: 1rem 0;
+    font-size: 2rem;
+}
+
+.author {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.editorial {
+    margin-bottom: 1rem;
+}
+
+.price-section {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.formats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.format-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #333;
+    background-color: white;
+    cursor: pointer;
+}
+
+.format-btn.active {
+    background-color: #333;
+    color: white;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #333;
+    background-color: white;
+    cursor: pointer;
+}
+
+#quantity {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #333;
+    margin: 0 0.5rem;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.favorite, .share {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.favorite svg, .share svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.collapsible-sections {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    margin-top: 3rem;
+}
+
+.collapse-content {
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+/* Add to existing CSS */
+.collapsible-sections {
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.collapsible {
+    border-bottom: 1px solid #eee;
+}
+
+.collapse-btn {
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.collapse-btn.active .arrow {
+    transform: rotate(180deg);
+}
+
+.collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 1rem;
+}
+
+.collapse-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+}
+
+.collapse-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.characteristics-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.characteristic-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+.characteristic-icon {
+    font-size: 1.2rem;
+}
+
+.characteristic-label {
+    font-weight: bold;
+    color: #666;
+}
+
+.container-books-section {
+    width: 100%;
+    height: auto;
+    background: white;
+}
+
+.characteristic-value {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .book-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .book-image img {
+        height: 500px;
+        object-fit: fill;
+    }
+
+    .characteristic-item {
+        grid-template-columns: auto 1fr;
+    }
+
+    .characteristic-value {
+        grid-column: 2;
+        text-align: left;
+    }
+}
+

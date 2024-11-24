@@ -1,5 +1,9 @@
 <?php
     include "../../app/config.php";
+    include_once "../../app/BooksController.php";
+
+    $bookController = new BooksController();
+    $books = $bookController->getBooks();
 ?>
 
 <!DOCTYPE html>
@@ -12,111 +16,91 @@
     <body>
         <?php include "../partials/header.php";?>
 
-        <div id="startView">
-            <h1 id="iLib" class="white">iLIb</h1>
-            <p id="slogan" class="textFont white">Una experiencia de lectura sin igual !!!</p>
-            <button id="createAccountB" class="button">Crear Cuenta</button>
-        </div>
-
-        <h2 id="bestBooksH" class="heading fullWidth">Los mejores libros</h2>
-        <div class="flexWrap marginTop rowGap bookContainer">
-            <a class="book" href="book.php">
-                <img alt="Imagen del libro: The Outsider" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1524596540i/36124936.jpg">
-                <h5>The Outsider</h5>
-                <p>Stephen King</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.98</h6>
+        <main>
+            <section class="hero-slider">
+                <button class="slider-arrow prev" aria-label="Imagen anterior">❮</button>
+                <button class="slider-arrow next" aria-label="Imagen siguiente">❯</button>
+                <div class="slides">
+                    <div class="slide">
+                        <img src="<?=BASE_PATH?>public/img/poster/poster-1.avif" alt="Promoción de libro 1">
+                    </div>
+                    <div class="slide">
+                        <img src="<?=BASE_PATH?>public/img/poster/poster-2.avif" alt="Promoción de libro 2">
+                    </div>
+                    <div class="slide">
+                        <img src="<?=BASE_PATH?>public/img/poster/poster-3.avif" alt="Promoción de libro 3">
+                    </div>
                 </div>
-            </a>
+            </section>
 
-            <a class="book" href="book">
-                <img alt="Imagen del libro: El código Da Vinci" class="bookShadow" src="https://imagessl8.casadellibro.com/a/l/s7/28/9788408175728.webp">
-                <h5>El código Da Vinci</h5>
-                <p>Dan Brown</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.81</h6>
-                </div>
-            </a>
-
-            <a class="book" href="book">
-                <img alt="Imagen del libro: El Alquimista" class="bookShadow" src="https://images.cdn3.buscalibre.com/fit-in/360x360/04/1f/041faab83743751d96b0b362733f33f4.jpg">
-                <h5>El Alquimista</h5>
-                <p>Paulo Coelho</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.79</h6>
-                </div>
-            </a>
-
-            <a class="book" href="book">
-                <img alt="Imagen del libro: The Last Star" class="bookShadow" src="https://m.media-amazon.com/images/I/91XNAr6qfoL._AC_UF894,1000_QL80_.jpg">
-                <h5>The Last Star</h5>
-                <p>Rick Yancey</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.92</h6>
-                </div>
-            </a>
-
-            <a class="book" href="book">
-                <img alt="Imagen del libro: The Inmate" class="bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1653271523i/61149872.jpg">
-                <h5>The Inmate</h5>
-                <p>Freida McFadden</p>
-                <div>
-                    <span class="fa fa-star checked"></span>
-                    <h6>4.77</h6>
-                </div>
-            </a>
-        </div>
-
-        <h2 id="genresH" class="heading">Todos los géneros que puedes imaginar</h2>
-        <div id="genres">
-            <div class="genreBox">
-                <img alt="Imagen del genero: Ciencia Ficción" class="genreImage bookShadow" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1555447414i/44767458.jpg">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Ciencia Ficcion</h3>
-                </div>
+            <div class="mobile-search-bar">
+                <input type="text" placeholder="¿Qué estás buscando?">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
-            <div class="genreBox">
-                <img alt="Imagen del genero: Fantasía" class="genreImage bookShadow" src="https://m.media-amazon.com/images/I/91VsRHjTY-L._AC_UF1000,1000_QL80_.jpg">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Fantasia</h3>
+            <section class="categories">
+                <div class="category-item">
+                    <i class="fa-solid fa-check fa-3x"></i>
+                    <span>Recomendados</span>
                 </div>
-            </div>
-
-            <div class="genreBox">
-                <img alt="Imagen del genero: Drama" class="genreImage bookShadow" src="https://www.clarin.com/2022/01/01/zj1ORlUpq_720x0__1.jpg">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Drama</h3>
+                <div class="category-item">
+                    <i class="fa-solid fa-book fa-3x"></i>
+                    <span>Novedades</span>
                 </div>
-            </div>
-
-            <div class="genreBox">
-                <img alt="Imagen del genero: Terror" class="genreImage bookShadow" src="https://media.vogue.es/photos/5cc7566515d9a36371e83c62/master/w_1600%2Cc_limit/living__469389592.jpg">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Terror</h3>
+                <div class="category-item">
+                    <i class="fa-solid fa-comment-dollar fa-3x"></i>
+                    <span>Mas vendidos</span>
                 </div>
-            </div>
+            </section>
 
-            <div class="genreBox">
-                <img alt="Imagen del genero: Arte" class="genreImage bookShadow" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwhnYchqY6Pz3WtGDkSPaPX7S9-FrPXDgK8w&s">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Arte</h3>
+            <section class="book-section">
+                <div class="section-header">
+                    <h2>Recomendados</h2>
+                    <div class="scroll-buttons">
+                        <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                        <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="genreBox">
-                <img alt="Imagen del genero: Viajes" class="genreImage bookShadow" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4CFMOFfaFbc7wd6Kb5ZM8aPoeM_RC8jOgbA&s">
-                <div class="genreTitleDiv">
-                    <h3 class="genreTitle">Viajes</h3>
+                <div class="book-slider">
+                    <?php foreach ($books as $book): ?>
+                        <div class="book-card">
+                            <a href="<?= BASE_PATH ?>/book?id=<?= $book['id'] ?>" style="text-decoration: none">
+                            <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="<?=$book['title']?>">
+                                <h3><?=$book['title']?></h3>
+                                <p class="author"><?=$book['author']?></p>
+                                <p class="price">$<?=$book['price']?></p>
+                                <button class="add-to-cart">Agregar al carrito</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
+            </section>
 
-        </div>
+            <section class="book-section">
+                <div class="section-header">
+                    <h2>Novedades</h2>
+                    <div class="scroll-buttons">
+                        <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                        <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+                    </div>
+                </div>
+                <div class="book-slider">
+                    <?php foreach ($books as $book): ?>
+                        <div class="book-card">
+                            <a href="book" style="text-decoration: none">
+                                <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="<?=$book['title']?>">
+                                <h3><?=$book['title']?></h3>
+                                <p class="author"><?=$book['author']?></p>
+                                <p class="price">$<?=$book['price']?></p>
+                                <button class="add-to-cart">Agregar al carrito</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        </main>
 
         <?php include "../partials/footer.php"; ?>
+        <?php include "../partials/scripts.php"; ?>
     </body>
 </html>
