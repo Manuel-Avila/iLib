@@ -1,3 +1,3 @@
 # ILIB
 
-## Por: Brayan Gammaliel, Yael Garcia y Manuel Avila
+## Por: Brayan Gamaliel, Yael Garcia y Manuel Avila
