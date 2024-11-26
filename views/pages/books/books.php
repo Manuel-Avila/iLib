@@ -1,15 +1,19 @@
 <?php
-    include "../../../app/config.php";
+    include_once "../../../app/config.php";
+    include_once "../../../app/BooksController.php";
+
+    $bookController = new BooksController();
+    $books = $bookController->getBooks();
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php include "../../partials/head.php"; ?>
+    <?php include_once "../../partials/head.php"; ?>
     <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/books.css">
 </head>
 <body>
-<?php include "../../partials/header.php"; ?>
+<?php include_once "../../partials/header.php"; ?>
 
 <div class="container">
     <!-- Desktop Sidebar -->
@@ -179,7 +183,24 @@
         </header>
         <main>
             <div class="book-grid" id="book-grid">
-                <!-- Books will be dynamically added here -->
+                <?php foreach($books as $book): ?>
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] ?>.jpg" alt="<?= $book["title"] ?>">
+                            <button class="favorite-btn" data-id="<?= $book["id"] ?>">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="book-info">
+                            <h2 class="book-title"><?= $book["title"] ?></h2>
+                            <p class="book-author"><?= $book["author"] ?></p>
+                            <p class="book-publisher"><?= $book["release_date"] ?></p>
+                            <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
+                            <p class="book-price">$<?= $book["price"] ?></p>
+                            <button class="add-to-cart">Agregar a mi bolsa</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </main>
     </div>
@@ -292,7 +313,7 @@
     </div>
 </div>
 
-    <?php include "../../partials/footer.php"; ?>
-    <?php include "../../partials/scripts.php"; ?>
+    <?php include_once "../../partials/footer.php"; ?>
+    <?php include_once "../../partials/scripts.php"; ?>
 </body>
 </html>

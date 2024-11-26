@@ -276,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Books
     //renderBooks(books);
-
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
         sortSelect.addEventListener('change', (e) => {
@@ -284,12 +283,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
     const bookGrid = document.getElementById('book-grid');
     if (bookGrid) {
         bookGrid.addEventListener('click', (e) => {
-            if (e.target.classList.contains('favorite-btn')) {
-                const btn = e.target;
+            if (e.target.classList.contains('favorite-btn') || e.target.closest('.favorite-btn')) {
+                const btn = e.target.closest('.favorite-btn');
                 const icon = btn.querySelector('i');
                 icon.classList.toggle('fas');
                 icon.classList.toggle('far');

@@ -3,6 +3,10 @@ RewriteEngine on
 
 # PAGES
 RewriteRule ^/?$ views/pages/index.php
-RewriteRule ^book/?$ views/pages/books/book-details.php
-RewriteRule ^books/?$ views/pages/books/books.php
+
+# BOOKS
+RewriteRule ^books/(.+)/?$ views/pages/books/book-details.php?id=$1 [L]
+RewriteRule ^books/?$ views/pages/books/books.php [L]
+
+# ERRORS
 RewriteRule ^error/?$ views/pages/errors/error.php

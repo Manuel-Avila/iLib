@@ -1,5 +1,5 @@
 <?php
-    include "../../app/config.php";
+    include_once "../../app/config.php";
     include_once "../../app/BooksController.php";
 
     $bookController = new BooksController();
@@ -10,11 +10,11 @@
 
 <html lang="es">
     <head>
-        <?php include "../partials/head.php"; ?>
+        <?php include_once "../partials/head.php"; ?>
     </head>
 
     <body>
-        <?php include "../partials/header.php";?>
+        <?php include_once "../partials/header.php";?>
 
         <main>
             <section class="hero-slider">
@@ -64,7 +64,7 @@
                 <div class="book-slider">
                     <?php foreach ($books as $book): ?>
                         <div class="book-card">
-                            <a href="<?= BASE_PATH ?>book?id=<?= $book['id'] ?>" style="text-decoration: none">
+                            <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
                             <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="<?=$book['title']?>">
                                 <h3><?=$book['title']?></h3>
                                 <p class="author"><?=$book['author']?></p>
@@ -100,7 +100,7 @@
             </section>
         </main>
 
-        <?php include "../partials/footer.php"; ?>
-        <?php include "../partials/scripts.php"; ?>
+        <?php include_once "../partials/footer.php"; ?>
+        <?php include_once "../partials/scripts.php"; ?>
     </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    include "../../../app/config.php";
+    include_once "../../../app/config.php";
 
    if (!isset($_GET['id'])) {
         header('Location: ' . BASE_PATH);
@@ -23,12 +23,12 @@
 
 <html lang="es">
     <head>
-        <?php include "../../partials/head.php"; ?>
+        <?php include_once "../../partials/head.php"; ?>
         <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
     </head>
 
     <body>
-    <?php include "../../partials/header.php";?>
+    <?php include_once "../../partials/header.php";?>
 
     <main class="book-details">
         <div class="book-image">
@@ -157,7 +157,7 @@
         </section>
     </div>
 
-    <?php include "../../partials/footer.php"; ?>
-    <?php include "../../partials/scripts.php"; ?>
+    <?php include_once "../../partials/footer.php"; ?>
+    <?php include_once "../../partials/scripts.php"; ?>
     </body>
 </html>
