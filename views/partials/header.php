@@ -6,7 +6,7 @@
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="#libros">Libros</a></li>
+            <li><a href="<?=BASE_PATH?>books">Libros</a></li>
             <li class="dropdown">
                 <a href="#textos">Categorías</a>
                 <ul class="dropdown-content">

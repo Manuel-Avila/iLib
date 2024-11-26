@@ -1,17 +1,19 @@
 <?php
-    include "../../app/config.php";
+    include "../../../app/config.php";
 
    if (!isset($_GET['id'])) {
-        header('Location: /');
+        header('Location: ' . BASE_PATH);
+        return;
     }
 
-    include_once "../../app/BooksController.php";
+    include_once "../../../app/BooksController.php";
 
     $bookController = new BooksController();
     $book = $bookController->getBookById($_GET['id']);
 
     if (empty($book)) {
-        header('Location: /');
+        header('Location:' . BASE_PATH . 'error');
+        return;
     }
 
     $book = $book[0];
@@ -21,12 +23,12 @@
 
 <html lang="es">
     <head>
-        <?php include "../partials/head.php"; ?>
+        <?php include "../../partials/head.php"; ?>
         <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
     </head>
 
     <body>
-    <?php include "../partials/header.php";?>
+    <?php include "../../partials/header.php";?>
 
     <main class="book-details">
         <div class="book-image">
@@ -60,7 +62,6 @@
                 Compartir
             </button>
         </div>
-        <!-- Previous HTML remains the same until the end of the main product info -->
         <div class="collapsible-sections">
             <div class="collapsible">
                 <button class="collapse-btn" onclick="toggleSection('synopsis')">
@@ -156,7 +157,7 @@
         </section>
     </div>
 
-    <?php include "../partials/footer.php"; ?>
-    <?php include "../partials/scripts.php"; ?>
+    <?php include "../../partials/footer.php"; ?>
+    <?php include "../../partials/scripts.php"; ?>
     </body>
 </html>
