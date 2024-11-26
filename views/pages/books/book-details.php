@@ -88,7 +88,7 @@
                         <div class="characteristic-item">
                             <span class="characteristic-icon">📅</span>
                             <span class="characteristic-label">Fecha de publicación:</span>
-                            <span class="characteristic-value"><?=$book["release_date"]?></span>
+                            <span class="characteristic-value"><?=convertDate($book["release_date"])?></span>
                         </div>
                         <div class="characteristic-item">
                             <span class="characteristic-icon">📖</span>

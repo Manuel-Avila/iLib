@@ -1,4 +1,6 @@
 <?php
+    include_once 'util/Utils.php';
+
     header("X-XSS-Protection: 1; mode=block");
 
     if (!isset($_SESSION)) {

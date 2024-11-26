@@ -194,7 +194,7 @@
                         <div class="book-info">
                             <h2 class="book-title"><?= $book["title"] ?></h2>
                             <p class="book-author"><?= $book["author"] ?></p>
-                            <p class="book-publisher"><?= $book["release_date"] ?></p>
+                            <p class="book-publisher"><?= convertDate($book["release_date"]) ?></p>
                             <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
                             <p class="book-price">$<?= $book["price"] ?></p>
                             <button class="add-to-cart">Agregar a mi bolsa</button>
