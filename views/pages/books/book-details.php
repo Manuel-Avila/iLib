@@ -1,7 +1,9 @@
 <?php
     include_once "../../../app/config.php";
 
-   if (!isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+   if (!isset($id)) {
         header('Location: ' . BASE_PATH);
         return;
     }
@@ -9,7 +11,7 @@
     include_once "../../../app/BooksController.php";
 
     $bookController = new BooksController();
-    $book = $bookController->getBookById($_GET['id']);
+    $book = $bookController->getBookById($id);
 
     if (empty($book)) {
         header('Location:' . BASE_PATH . 'error');
@@ -17,6 +19,8 @@
     }
 
     $book = $book[0];
+    $booksAuthor = $bookController->getBooksByAuthor($id);
+    $booksSimilar = $bookController->getBooksSimilarById($id);
 ?>
 
 <!DOCTYPE html>
@@ -102,59 +106,74 @@
     </main>
 
     <div class="container-books-section">
-        <section class="book-section">
-            <div class="section-header">
-                <h2>Libros relacionados</h2>
-                <div class="scroll-buttons">
-                    <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
-                    <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+        <?php if(array_count_values($booksAuthor)): ?>
+            <section class="book-section">
+                <div class="section-header">
+                    <h2>Mas libros por el autor</h2>
+                    <div class="scroll-buttons">
+                        <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                        <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+                    </div>
                 </div>
-            </div>
-            <div class="book-slider">
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 6">
-                    <h3>La ciudad de vapor</h3>
-                    <p class="author">Carlos Ruiz Zafón</p>
-                    <p class="price">$329.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                <div class="book-slider">
+                    <?php foreach($booksAuthor as $bookAuthor): ?>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $bookAuthor["id"] ?>.jpg" alt="<?= $bookAuthor["title"] ?>">
+                                <button class="favorite-btn" data-id="<?= $bookAuthor["id"] ?>">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                            <a href="<?= BASE_PATH ?>books/<?= $bookAuthor["id"] ?>" style="text-decoration: none; color: black">
+                                <div class="book-info">
+                                    <h2 class="book-title"><?= $bookAuthor["title"] ?></h2>
+                                    <p class="book-author"><?= $bookAuthor["author"] ?></p>
+                                    <p class="book-publisher"><?= convertDate($bookAuthor["release_date"]) ?></p>
+                                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
+                                    <p class="book-price">$<?= $bookAuthor["price"] ?></p>
+                                    <button class="add-to-cart">Agregar a mi bolsa</button>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 7">
-                    <h3>El infinito en un junco</h3>
-                    <p class="author">Irene Vallejo</p>
-                    <p class="price">$289.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
+            </section>
+        <?php endif; ?>
+
+        <?php if(array_count_values($booksSimilar)): ?>
+            <section class="book-section">
+                <div class="section-header">
+                    <h2>Libros relacionados</h2>
+                    <div class="scroll-buttons">
+                        <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                        <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+                    </div>
                 </div>
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 8">
-                    <h3>Línea de fuego</h3>
-                    <p class="author">Arturo Pérez-Reverte</p>
-                    <p class="price">$379.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
+                <div class="book-slider">
+                    <?php foreach($booksSimilar as $bookSimilar): ?>
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $bookSimilar["id"] ?>.jpg" alt="<?= $bookSimilar["title"] ?>">
+                                <button class="favorite-btn" data-id="<?= $bookSimilar["id"] ?>">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                            <a href="<?= BASE_PATH ?>books/<?= $bookSimilar["id"] ?>" style="text-decoration: none; color: black">
+                                <div class="book-info">
+                                    <h2 class="book-title"><?= $bookSimilar["title"] ?></h2>
+                                    <p class="book-author"><?= $bookSimilar["author"] ?></p>
+                                    <p class="book-publisher"><?= convertDate($bookSimilar["release_date"]) ?></p>
+                                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
+                                    <p class="book-price">$<?= $bookSimilar["price"] ?></p>
+                                    <button class="add-to-cart">Agregar a mi bolsa</button>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 9">
-                    <h3>Reina roja</h3>
-                    <p class="author">Juan Gómez-Jurado</p>
-                    <p class="price">$299.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
-                </div>
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 10">
-                    <h3>Sira</h3>
-                    <p class="author">María Dueñas</p>
-                    <p class="price">$349.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
-                </div>
-                <div class="book-card">
-                    <img src="../book.jpg" alt="Libro 5">
-                    <h3>Don Quijote de la Mancha</h3>
-                    <p class="author">Miguel de Cervantes</p>
-                    <p class="price">$399.00</p>
-                    <button class="add-to-cart">Agregar al carrito</button>
-                </div>
-            </div>
-        </section>
+            </section>
+        <?php endif; ?>
+
     </div>
 
     <?php include_once "../../partials/footer.php"; ?>

@@ -1,3 +1,7 @@
+:root {
+    --dark-red: #780828;
+}
+
 .container {
     display: flex;
     min-height: 100vh;
@@ -16,7 +20,7 @@
 }
 
 .desktop-sidebar h1 {
-    color: #1E40AF;
+    color: var(--dark-red);
     font-size: 24px;
     margin-bottom: 32px;
 }
@@ -31,7 +35,7 @@
     align-items: center;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #1E40AF;
+    border-bottom: 2px solid var(--dark-red);
 }
 
 .filter-header h2 {
@@ -82,7 +86,7 @@ input[type="radio"]:checked + .radio-custom::after {
     transform: translate(-50%, -50%);
     width: 10px;
     height: 10px;
-    background: #1E40AF;
+    background: var(--dark-red);
     border-radius: 50%;
 }
 
@@ -93,7 +97,7 @@ input[type="checkbox"]:checked + .checkbox-custom::after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #1E40AF;
+    color: var(--dark-red);
     font-size: 14px;
 }
 
@@ -198,7 +202,7 @@ input[type="radio"], input[type="checkbox"] {
 .add-to-cart {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: var(--dark-red);
     color: #fff;
     border: none;
     border-radius: 5px;

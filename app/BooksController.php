@@ -1,4 +1,5 @@
 <?php
+
 require_once 'ApiHandler.php';
 
 class BooksController {
@@ -13,7 +14,6 @@ class BooksController {
             $users = $this->apiHandler->makeRequest('/books', 'GET');
             return $users;
         } catch (Exception $e) {
-            echo "Error al obtener libros: " . $e->getMessage();
             return [];
         }
     }
@@ -23,7 +23,24 @@ class BooksController {
             $book = $this->apiHandler->makeRequest('/books/' . $id, 'GET');
             return $book;
         } catch (Exception $e) {
-            echo "Error al obtener libro: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function getBooksByAuthor($author) {
+        try {
+            $book = $this->apiHandler->makeRequest('/books?author=' . $author, 'GET');
+            return $book;
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public function getBooksSimilarById($id) {
+        try {
+            $book = $this->apiHandler->makeRequest('/books/similar/' . $id, 'GET');
+            return $book;
+        } catch (Exception $e) {
             return [];
         }
     }
