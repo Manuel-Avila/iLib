@@ -25,7 +25,7 @@
             <div class="icons">
                 <a href="#favoritos" aria-label="Favoritos"><i class="fa-solid fa-star"></i></a>
                 <a href="#carrito" aria-label="Carrito"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="#cuenta" aria-label="Mi cuenta"><i class="fa-solid fa-user"></i></a>
+                <a href="<?=BASE_PATH?>login" aria-label="Mi cuenta"><i class="fa-solid fa-user"></i></a>
             </div>
             <button id="mobile-menu-btn" aria-label="Abrir menú">☰</button>
         </div>
