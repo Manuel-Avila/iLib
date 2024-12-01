@@ -13,3 +13,9 @@ RewriteRule ^error/?$ views/pages/errors/error.php
 
 # LOGIN
 RewriteRule ^login/?$ views/pages/login.php [L]
+
+# REGISTER
+RewriteRule ^register/?$ views/pages/register.php [L]
+
+# FORGOT-PASSWORD
+RewriteRule ^forgot-password/?$ views/pages/forgot-password.php [L]

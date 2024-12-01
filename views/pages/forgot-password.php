@@ -7,14 +7,8 @@ define('BASE_PATH', '/iLib/');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Librería</title>
+    <title>¿Olvidaste tu contraseña? - Librería</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
@@ -26,9 +20,10 @@ define('BASE_PATH', '/iLib/');
             background-position: center;
             background-repeat: no-repeat;
             padding: 20px;
+            margin: 0;
         }
 
-        .login-container {
+        .forgot-password-container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 8px;
@@ -103,59 +98,10 @@ define('BASE_PATH', '/iLib/');
             background-color: #6d102b;
         }
 
-        .divider {
-            text-align: center;
-            margin: 20px 0;
-            color: #6b7280;
-            position: relative;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background-color: #d1d5db;
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .google-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 8px 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            background-color: white;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .google-button:hover {
-            background-color: #f3f4f6;
-        }
-
-        .google-icon {
-            width: 18px;
-            height: 18px;
-            margin-right: 8px;
-        }
-
         .links {
             display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-            margin-bottom: 5px;
+            justify-content: center;
+            margin-top: 15px;
             font-size: 0.875rem;
         }
 
@@ -171,7 +117,7 @@ define('BASE_PATH', '/iLib/');
         }
 
         @media (max-width: 480px) {
-            .login-container {
+            .forgot-password-container {
                 padding: 1.5rem;
             }
 
@@ -194,10 +140,10 @@ define('BASE_PATH', '/iLib/');
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="forgot-password-container">
         <img src="public/img/logo.png" alt="Logo" class="logo">
-        <h1>Iniciar Sesión</h1>
-        <p>Ingresa a tu cuenta para acceder a tu biblioteca</p>
+        <h1>¿Olvidaste tu contraseña?</h1>
+        <p>Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
         <form>
             <label for="email">Correo electrónico</label>
             <input 
@@ -209,33 +155,12 @@ define('BASE_PATH', '/iLib/');
                 autocomplete="email"
             >
             
-            <label for="password">Contraseña</label>
-            <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                required
-                autocomplete="current-password"
-            >
-            
-            <div class="links">
-                <a href="<?=BASE_PATH?>forgot-password">¿Olvidaste tu contraseña?</a>
-            </div>
-            
-            <button type="submit" class="primary-button">Iniciar Sesión</button>
-            
-
-            <div class="links" style="justify-content: center; margin-bottom: 15px;">
-                <span>¿No tienes una cuenta? <a href="<?=BASE_PATH?>register" style="color: #8b1538;">Regístrate aquí</a></span>
-            </div>
+            <button type="submit" class="primary-button">Enviar instrucciones</button>
         </form>
 
-        <div class="divider">O</div>
-
-        <button class="google-button">
-            <img src="https://www.google.com/favicon.ico" alt="Google" class="google-icon">
-            Continuar con Google
-        </button>
+        <div class="links">
+            <a href="<?=BASE_PATH?>login">Volver a Iniciar Sesión</a>
+        </div>
     </div>
 </body>
 </html>

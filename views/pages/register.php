@@ -7,7 +7,7 @@ define('BASE_PATH', '/iLib/');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Librería</title>
+    <title>Registro - Librería</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,19 +16,19 @@ define('BASE_PATH', '/iLib/');
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('public/img/backgroundLogin.jpeg');
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('public/img/backgroundLogin.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             padding: 20px;
         }
 
-        .login-container {
+        .register-container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 8px;
@@ -153,9 +153,8 @@ define('BASE_PATH', '/iLib/');
 
         .links {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             margin-top: 10px;
-            margin-bottom: 5px;
             font-size: 0.875rem;
         }
 
@@ -171,7 +170,7 @@ define('BASE_PATH', '/iLib/');
         }
 
         @media (max-width: 480px) {
-            .login-container {
+            .register-container {
                 padding: 1.5rem;
             }
 
@@ -194,11 +193,21 @@ define('BASE_PATH', '/iLib/');
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="register-container">
         <img src="public/img/logo.png" alt="Logo" class="logo">
-        <h1>Iniciar Sesión</h1>
-        <p>Ingresa a tu cuenta para acceder a tu biblioteca</p>
+        <h1>Registro</h1>
+        <p>Crea tu cuenta para acceder a nuestra biblioteca</p>
         <form>
+            <label for="name">Nombre completo</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                placeholder="Tu nombre completo"
+                autocomplete="name"
+            >
+            
             <label for="email">Correo electrónico</label>
             <input 
                 type="email" 
@@ -215,27 +224,32 @@ define('BASE_PATH', '/iLib/');
                 id="password" 
                 name="password" 
                 required
-                autocomplete="current-password"
+                autocomplete="new-password"
             >
             
-            <div class="links">
-                <a href="<?=BASE_PATH?>forgot-password">¿Olvidaste tu contraseña?</a>
-            </div>
+            <label for="confirm-password">Confirmar contraseña</label>
+            <input 
+                type="password" 
+                id="confirm-password" 
+                name="confirm-password" 
+                required
+                autocomplete="new-password"
+            >
             
-            <button type="submit" class="primary-button">Iniciar Sesión</button>
-            
-
-            <div class="links" style="justify-content: center; margin-bottom: 15px;">
-                <span>¿No tienes una cuenta? <a href="<?=BASE_PATH?>register" style="color: #8b1538;">Regístrate aquí</a></span>
-            </div>
+            <button type="submit" class="primary-button">Registrarse</button>
         </form>
 
         <div class="divider">O</div>
 
         <button class="google-button">
             <img src="https://www.google.com/favicon.ico" alt="Google" class="google-icon">
-            Continuar con Google
+            Registrarse con Google
         </button>
+
+        <div class="links">
+            <a href="<?=BASE_PATH?>login">¿Ya tienes una cuenta? Inicia sesión</a>
+        </div>
     </div>
 </body>
 </html>
+
