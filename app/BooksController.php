@@ -6,12 +6,9 @@ require_once 'ApiHandler.php';
 
 final class BooksController {
 
-    /**
-     * @param ApiHandler $apiHandler
-     */
-    public function __construct(
-        private ApiHandler $apiHandler,
-    ) {
+    private ApiHandler $apiHandler;
+
+    public function __construct() {
         $this->apiHandler = new ApiHandler('https://library-api-0e3t.onrender.com');
     }
 
