@@ -101,4 +101,14 @@ final class BooksController {
             return [];
         }
     }
+
+    public function deleteBook(
+        string $id
+    ) : array {
+        try {
+            return $this->apiHandler->makeRequest('/books/' . $id, 'DELETE');
+        } catch (Exception $e) {
+            return [];
+        }
+    }
 }
