@@ -1,15 +1,23 @@
 <?php
 
-class ApiHandler {
-    private $apiBaseUrl;
+declare(strict_types=1);
 
-    public function __construct($baseUrl)
+final class ApiHandler {
+    private string $apiBaseUrl;
+
+    public function __construct(string $baseUrl)
     {
         $this->apiBaseUrl = $baseUrl;
     }
 
-    public function makeRequest($endpoint, $method = 'GET', $data = [])
-    {
+    /**
+     * @throws Exception
+     */
+    public function makeRequest(
+        string $endpoint,
+        string $method = 'GET',
+        array $data = []
+    ) : array {
         $url = $this->apiBaseUrl . $endpoint;
 
         $curl = curl_init();
@@ -19,8 +27,11 @@ class ApiHandler {
         if ($method === 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-        } elseif ($method === 'PUT' || $method === 'DELETE') {
-            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        } elseif ($method === 'PATCH') {
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        } elseif ($method === 'DELETE') {
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
         }
 

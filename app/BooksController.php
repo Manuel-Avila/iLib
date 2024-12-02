@@ -1,45 +1,102 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'ApiHandler.php';
 
-class BooksController {
-    private $apiHandler;
+final class BooksController {
 
-    public function __construct() {
+    /**
+     * @param ApiHandler $apiHandler
+     */
+    public function __construct(
+        private ApiHandler $apiHandler,
+    ) {
         $this->apiHandler = new ApiHandler('https://library-api-0e3t.onrender.com');
     }
 
-    public function getBooks() {
+    public function getBooks() : array {
         try {
-            $users = $this->apiHandler->makeRequest('/books', 'GET');
-            return $users;
+            return $this->apiHandler->makeRequest('/books');
         } catch (Exception $e) {
             return [];
         }
     }
 
-    public function getBookById($id) {
+    public function createBook(
+        string $title,
+        string $author,
+        string $description,
+        int $pages,
+        string $editorial,
+        int $price,
+        string $release_date,
+        string $isbn,
+        array $genre,
+    ) : array {
+        if (empty($title) || empty($author) || empty($description) || empty($pages) || empty($editorial) || empty($price) || empty($release_date) || empty($isbn) || empty($genre)) {
+            return [];
+        }
+
+        $data = [
+            'title' => $title,
+            'author' => $author,
+            'description' => $description,
+            'pages' => $pages,
+            'editorial' => $editorial,
+            'price' => $price,
+            'release_date' => $release_date,
+            'isbn' => $isbn,
+            'genre' => $genre,
+        ];
+
         try {
-            $book = $this->apiHandler->makeRequest('/books/' . $id, 'GET');
-            return $book;
+            return $this->apiHandler->makeRequest('/books', 'POST', $data);
         } catch (Exception $e) {
             return [];
         }
     }
 
-    public function getBooksByAuthor($author) {
+    public function editBook(
+        string $id,
+        array $data
+    ) : array {
+        if (empty($id) || empty($data)) {
+            return [];
+        }
+
         try {
-            $book = $this->apiHandler->makeRequest('/books?author=' . $author, 'GET');
-            return $book;
+            return $this->apiHandler->makeRequest('/books/' . $id, 'PATCH', $data);
         } catch (Exception $e) {
             return [];
         }
     }
 
-    public function getBooksSimilarById($id) {
+    public function getBookById(
+        string $id
+    ) : array {
         try {
-            $book = $this->apiHandler->makeRequest('/books/similar/' . $id, 'GET');
-            return $book;
+            return $this->apiHandler->makeRequest('/books/' . $id, 'GET');
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public function getBooksByAuthor(
+        string $author
+    ) : array {
+        try {
+            return $this->apiHandler->makeRequest('/books?author=' . $author, 'GET');
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public function getBooksSimilarById(
+        string $id
+    ) : array {
+        try {
+            return $this->apiHandler->makeRequest('/books/similar/' . $id, 'GET');
         } catch (Exception $e) {
             return [];
         }
