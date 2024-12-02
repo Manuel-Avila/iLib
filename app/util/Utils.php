@@ -4,16 +4,16 @@ function convertDate($dateToConvert) {
     try {
         $date = new DateTime($dateToConvert);
 
-        $mouths = [
+        $months = [
             1 => 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
 
         $day = $date->format('j');
-        $mouth = (int)$date->format('n');
+        $month = (int)$date->format('n');
         $year = $date->format('Y');
 
-        return "$day de " . $mouths[$mouth] . " del $year";
+        return "$day de " . $months[$month] . " del $year";
     } catch (Exception $e) {
         return "Fecha no válida: " . $e->getMessage();
     }

@@ -1,5 +1,8 @@
 :root {
     --dark-red: #780828;
+    --red-hover: #951237;
+    --green-color: #30b43d;
+    --green-hover: #32c440;
 }
 
 .container {
@@ -197,6 +200,45 @@ input[type="radio"], input[type="checkbox"] {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.book-options {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    row-gap: 10px;
+}
+
+.book-options a {
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+}
+
+.button {
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border: none;
+}
+
+.edit-button {
+    background-color: var(--green-color);
+}
+
+.edit-button:hover {
+    background-color: var(--green-hover);
+}
+
+.delete-button {
+    background-color: var(--dark-red);
+}
+
+.delete-button:hover {
+    background-color: var(--red-hover);
 }
 
 .add-to-cart {

@@ -185,22 +185,29 @@
             <div class="book-grid" id="book-grid">
                 <?php foreach($books as $book): ?>
                     <div class="book-card">
-                        <div class="book-cover">
-                            <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] ?>.jpg" alt="<?= $book["title"] ?>">
-                            <button class="favorite-btn" data-id="<?= $book["id"] ?>">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                        <a href="<?= BASE_PATH ?>books/<?= $book["id"] ?>" style="text-decoration: none; color: black">
+                        <a href="<?= BASE_PATH ?>books/<?= $book["id"] ?>" style="text-decoration: none; color: black;">
+                            <div class="book-cover">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] ?>.jpg" alt="<?= $book["title"] ?>">
+                                <button class="favorite-btn" data-id="<?= $book["id"] ?>">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
                             <div class="book-info">
                                 <h2 class="book-title"><?= $book["title"] ?></h2>
                                 <p class="book-author"><?= $book["author"] ?></p>
                                 <p class="book-publisher"><?= convertDate($book["release_date"]) ?></p>
                                 <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
                                 <p class="book-price">$<?= $book["price"] ?></p>
-                                <button class="add-to-cart">Agregar a mi bolsa</button>
                             </div>
                         </a>
+                        <div class="book-options">
+                            <?php $_SESSION['user_role'] = 'admin'; if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
+                                <a class="button edit-button" href="<?= BASE_PATH ?>views/pages/books/bookForm.php?book_id=<?= $book["id"]; ?>">Editar</a>
+                                <a class="button delete-button">Eliminar</a>
+                            <?php else: ?>
+                                <button class="add-to-cart">Agregar a mi bolsa</button>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
