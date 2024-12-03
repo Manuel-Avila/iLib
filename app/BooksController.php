@@ -73,7 +73,7 @@ final class BooksController {
         string $id
     ) : array {
         try {
-            return $this->apiHandler->makeRequest('/books/' . $id, 'GET');
+            return $this->apiHandler->makeRequest('/books/' . $id);
         } catch (Exception $e) {
             return [];
         }
@@ -83,7 +83,7 @@ final class BooksController {
         string $author
     ) : array {
         try {
-            return $this->apiHandler->makeRequest('/books?author=' . $author, 'GET');
+            return $this->apiHandler->makeRequest('/books?author=' . $author);
         } catch (Exception $e) {
             return [];
         }
@@ -93,7 +93,7 @@ final class BooksController {
         string $id
     ) : array {
         try {
-            return $this->apiHandler->makeRequest('/books/similar/' . $id, 'GET');
+            return $this->apiHandler->makeRequest('/books/similar/' . $id);
         } catch (Exception $e) {
             return [];
         }
