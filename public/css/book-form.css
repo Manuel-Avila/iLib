@@ -59,6 +59,7 @@ main {
 
 .book-cover {
     width: 350px;
+    height: 500px;
     cursor: pointer;
 }
 
@@ -132,6 +133,10 @@ input[type="file"] {
         order: 1;
     }
 
+    .book-cover {
+        height: 510px;
+    }
+
     .image-field {
         width: 100%;
         order: 2;
@@ -152,8 +157,13 @@ input[type="file"] {
 }
 
 @media (max-width: 530px) {
+    .form {
+        padding-bottom: 120px;
+    }
+
     .book-cover {
         width: 180px;
+        height: 310px;
     }
 
     .form-options {
