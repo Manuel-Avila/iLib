@@ -5,17 +5,18 @@
     require_once __DIR__ . "/../../../app/GenreController.php";
 
     $title = "Agregar Libro";
-    $action_path = __DIR__ . "/../../../app/BooksController.php";
+    $action_path = BASE_PATH . 'app/BooksController.php';
     $booksController = new BooksController();
     $book = null;
     $genresController = new GenreController();
     $genres = $genresController->getGenres();
-    $bookCover = BASE_PATH . 'public/img/image-placeholder.png';
+    $bookCover = BASE_PATH . 'public/img/book-placeholder.png';
 
     if (isset($_GET['book_id'])) {
         $title = "Editar Libro";
         $book_id = filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $book = $booksController->getBookById($book_id);
+        $releaseDate = explode('T', $book[0]['release_date'])[0];
         $bookCover = glob(__DIR__ . "/../../../public/img/books/$book_id.*");
         $bookCover = str_replace(__DIR__ . "/../../..", BASE_PATH, $bookCover[0]);
         $action_path.="?book_id=$book_id";
@@ -36,7 +37,7 @@
             <form action="<?=$action_path?>" class="form" method="post" enctype="multipart/form-data">
                 <div class="image-field">
                     <label>
-                        <img alt="Book Cover" class="book-cover" src="<?=$bookCover?>">
+                        <img alt="Book Cover" class="book-cover" id="book-cover" src="<?=$bookCover?>">
                         <input accept="image/*" id="image-input" name="image" type="file">
                     </label>
                     <button class="button return-button" id="add-image-button" type="button">Agregar Imagen</button>
@@ -66,9 +67,7 @@
     
                     <div class="form-group">
                         <label for="desciption">Descripcion</label>
-                        <textarea name="description" id="description" placeholder="Descripcion">
-                            <?=htmlspecialchars($book[0]['description'] ?? '')?>
-                        </textarea>
+                        <textarea name="description" id="description" placeholder="Descripcion"><?=htmlspecialchars($book[0]['description'] ?? '')?></textarea>
                     </div>
     
                     <div class="form-group">
@@ -83,7 +82,7 @@
     
                     <div class="form-group">
                         <label for="release_date">Fecha de Lanzamiento</label>
-                        <input name="release_date" id="release_date" required type="date">
+                        <input name="release_date" id="release_date" required type="date" value="<?=$releaseDate ?? ''?>">
                     </div>
 
                     <label id="genres-label">Generos</label>
@@ -91,7 +90,7 @@
                         <?php foreach ($genres as $genre): ?>
                             <div class="genre-container">
                                 <label class="flex-direction-row checkbox-label">
-                                    <input type="checkbox" name="<?=$genre['name']?>" value="<?=$genre['name']?>">
+                                    <input type="checkbox" name="<?=$genre['name']?>">
                                     <span class="checkbox-custom"></span>
                                     <?=$genre['name']?>
                                 </label>
@@ -110,10 +109,6 @@
         <?php include_once VIEWS_PATH . "/partials/footer.php"; ?>
         <?php include_once VIEWS_PATH . "/partials/scripts.php"; ?>
 
-        <script>
-            document.querySelector('#add-image-button').addEventListener('click', () => {
-                document.querySelector('#image-input').click();
-            });
-        </script>
+        <script src="<?=BASE_PATH?>public/js/book-form.js"></script>
     </body>
 </html>

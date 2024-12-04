@@ -120,3 +120,48 @@ input[type="file"] {
 #description {
     height: 10rem;
 }
+
+@media (max-width: 1080px) {
+    .form {
+        flex-wrap: wrap;
+        padding: 50px 5px 200px 5px;
+    }
+
+    .form-fields {
+        width: 80%;
+        order: 1;
+    }
+
+    .image-field {
+        width: 100%;
+        order: 2;
+    }
+
+    .form-options {
+        position: relative;
+        top: 700px;
+    }
+
+    .genres-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 530px) {
+    .book-cover {
+        width: 180px;
+    }
+
+    .form-options {
+        position: relative;
+        top: 450px;
+    }
+
+    .genres-container {
+        grid-template-columns: 1fr;
+    }
+}
