@@ -58,56 +58,6 @@
     gap: 12px;
 }
 
-/* Custom Radio Buttons and Checkboxes */
-.radio-label, .checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #666;
-}
-
-.radio-custom, .checkbox-custom {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-}
-
-.checkbox-custom {
-    border-radius: 4px;
-}
-
-input[type="radio"]:checked + .radio-custom::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    background: var(--dark-red);
-    border-radius: 50%;
-}
-
-input[type="checkbox"]:checked + .checkbox-custom::after {
-    content: '✓';
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--dark-red);
-    font-size: 14px;
-}
-
-input[type="radio"], input[type="checkbox"] {
-    display: none;
-}
-
 /* Main Content Area */
 .main-content {
     z-index: 1;
@@ -117,6 +67,7 @@ input[type="radio"], input[type="checkbox"] {
 
 /* Mobile Header Styles */
 .mobile-header {
+    position: relative;
     margin-bottom: 20px;
 }
 
@@ -225,6 +176,22 @@ input[type="radio"], input[type="checkbox"] {
     border: none;
 }
 
+#add-book-button {
+    display: flex;
+    justify-content: center;
+    background-color: var(--dark-red);
+    color: #fff;
+    margin: 20px auto;
+    width: 30%;
+    max-width: 800px;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+#add-book-button:hover {
+    transform: translateY(-5px);
+}
+
 .edit-button {
     background-color: var(--green-color);
 }
@@ -237,7 +204,7 @@ input[type="radio"], input[type="checkbox"] {
     background-color: var(--dark-red);
 }
 
-.delete-button:hover {
+.delete-button:hover, #add-book-button:hover {
     background-color: var(--red-hover);
 }
 

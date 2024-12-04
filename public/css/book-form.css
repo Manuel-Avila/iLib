@@ -1,0 +1,122 @@
+:root {
+    --dark-red: #780828;
+    --red-hover: #951237;
+    --green-color: #30b43d;
+    --green-hover: #32c440;
+}
+
+main {
+    background-color: #eee;
+    padding: 2rem;
+}
+
+.form {
+    display: flex;
+    background-color: white;
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px;
+    column-gap: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-fields {
+    width: 50%;
+    margin: auto;
+}
+
+.form h1 {
+    text-align: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 12px auto;
+}
+
+.form-group label, #genres-label{ 
+    font-weight: 600;
+}
+
+.form-group input, .form-group textarea {
+    border: 1px solid;
+    border-radius: 7px;
+    height: 30px;
+    padding-left: 5px;
+    font-size: .9rem;
+    background-color: #eee;
+}
+
+.image-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.book-cover {
+    width: 350px;
+    cursor: pointer;
+}
+
+.genres-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 5px;
+}
+
+.genre-container {
+    display: inline-block;
+}
+
+.form-options {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.button {
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    transition: transform 0.3s;
+    width: 200px;
+}
+
+.button:hover {
+    transform: translateY(-5px);
+}
+
+.accept-button {
+    background-color: var(--dark-red);
+    color: white;
+}
+
+.accept-button:hover {
+    background-color: var(--red-hover);
+}
+
+.return-button {
+    text-decoration: none;
+    color: black;
+    background-color: #d0cece;
+}
+
+.return-button:hover {
+    background-color: #c3bfbf;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#description {
+    height: 10rem;
+}

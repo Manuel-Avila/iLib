@@ -1,0 +1,49 @@
+/* Custom Radio Buttons and Checkboxes */
+.radio-label, .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+.radio-custom, .checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.checkbox-custom {
+    border-radius: 4px;
+}
+
+input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: var(--dark-red);
+    border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '✓';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--dark-red);
+    font-size: 14px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    display: none;
+}

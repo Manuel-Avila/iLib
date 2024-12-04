@@ -11,6 +11,7 @@
 <head>
     <?php include_once "../../partials/head.php"; ?>
     <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/books.css">
+    <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/custom-checkboxes.css">
 </head>
 <body>
 <?php include_once "../../partials/header.php"; ?>
@@ -18,7 +19,7 @@
 <div class="container">
     <!-- Desktop Sidebar -->
     <aside class="desktop-sidebar">
-        <h1>Todos en Libros</h1>
+        <h1>Libros</h1>
 
         <div class="filter-section">
             <div class="filter-header">
@@ -180,6 +181,9 @@
                 </select>
                 <button id="filter-button">Filtrar Por <i class="fas fa-sliders-h"></i></button>
             </div>
+            <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
+                <a id="add-book-button" class="button" href="<?= BASE_PATH ?>views/pages/books/book-form.php">Agregar Libro</a>
+            <?php endif; ?>
         </header>
         <main>
             <div class="book-grid" id="book-grid">
@@ -201,8 +205,8 @@
                             </div>
                         </a>
                         <div class="book-options">
-                            <?php $_SESSION['user_role'] = 'admin'; if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
-                                <a class="button edit-button" href="<?= BASE_PATH ?>views/pages/books/bookForm.php?book_id=<?= $book["id"]; ?>">Editar</a>
+                            <?php /*Delete*/$_SESSION['user_role'] = 'admin'; /*Delete*/ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
+                                <a class="button edit-button" href="<?= BASE_PATH ?>views/pages/books/book-form.php?book_id=<?= $book["id"]; ?>">Editar</a>
                                 <a class="button delete-button">Eliminar</a>
                             <?php else: ?>
                                 <button class="add-to-cart">Agregar a mi bolsa</button>
