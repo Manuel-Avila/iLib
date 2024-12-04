@@ -21,7 +21,7 @@ define('BASE_PATH', '/iLib/');
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('public/img/backgroundLogin.jpeg');
+            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('<?=BASE_PATH?>public/img/backgroundLogin.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -195,7 +195,7 @@ define('BASE_PATH', '/iLib/');
 </head>
 <body>
     <div class="login-container">
-        <img src="public/img/logo.png" alt="Logo" class="logo">
+        <img src="<?=BASE_PATH?>public/img/logo.png" alt="Logo" class="logo">
         <h1>Iniciar Sesión</h1>
         <p>Ingresa a tu cuenta para acceder a tu biblioteca</p>
         <form>
