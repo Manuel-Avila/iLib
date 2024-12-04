@@ -17,6 +17,30 @@ function toggleSection(sectionId) {
     button.classList.toggle('active');
 }
 
+function convertDate(dateToConvert) {
+    try {
+        const date = new Date(dateToConvert);
+
+        if (isNaN(date)) {
+            throw new Error('Fecha no válida');
+        }
+
+        const months = [
+            'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+        ];
+
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+
+        return `${day} de ${months[month]} del ${year}`;
+    } catch (e) {
+        return "Fecha no válida: " + e.message;
+    }
+}
+
+
 // BOOKS
 function renderBooks(booksToRender) {
     const bookGrid = document.getElementById('book-grid');
@@ -26,73 +50,99 @@ function renderBooks(booksToRender) {
         const bookCard = document.createElement('div');
         bookCard.className = 'book-card';
         bookCard.innerHTML = `
-            <div class="book-cover">
-                <img src="${book.cover}" alt="${book.title}">
-                <button class="favorite-btn" data-id="${book.id}">
-                    <i class="far fa-heart"></i>
-                </button>
-            </div>
-            <div class="book-info">
-                <h2 class="book-title">${book.title}</h2>
-                <p class="book-author">${book.author}</p>
-                <p class="book-publisher">${book.publisher}</p>
-                <p class="book-format"><i class="fas fa-book"></i> ${book.format}</p>
-                <p class="book-price">$${book.price}</p>
-                <button class="add-to-cart">Agregar a mi bolsa</button>
-            </div>
+            <a href="http://localhost:8888/iLib/books/${book.id}" style="text-decoration: none; color: black;">
+                <div class="book-cover">
+                    <img src="http://localhost:8888/iLib/public/img/books/${book.id}.jpg" alt="${book.title}">
+                    <button class="favorite-btn" data-id="${book.id}">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="book-info">
+                    <h2 class="book-title">${book.title}</h2>
+                    <p class="book-author">${book.author}</p>
+                    <p class="book-publisher">${convertDate(book.release_date)}</p>
+                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
+                    <p class="book-price">$${book.price}</p>
+                    <button class="add-to-cart">Agregar a mi bolsa</button>
+                </div>
+            </a>
         `;
         bookGrid.appendChild(bookCard);
     });
 }
 
 function sortBooks(sortBy) {
-    let sortedBooks = [...books];
-    switch (sortBy) {
-        case 'price-low':
-            sortedBooks.sort((a, b) => a.price - b.price);
-            break;
-        case 'price-high':
-            sortedBooks.sort((a, b) => b.price - a.price);
-            break;
-        case 'name':
-            sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
-            break;
-        default:
-            // For 'release-date' or any other option, we'll use the default order
-            break;
-    }
-    renderBooks(sortedBooks);
+    applyFilters().then(books => {
+        let sortedBooks = [... books];
+        switch (sortBy) {
+            case 'price-low':
+                sortedBooks.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                sortedBooks.sort((a, b) => b.price - a.price);
+                break;
+            case 'name':
+                sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            default:
+                // For 'release-date' or any other option, we'll use the default order
+                break;
+        }
+
+        renderBooks(sortedBooks);
+    });
 }
 
 function applyFilters() {
-    const selectedType = document.querySelector('input[name="type"]:checked').value;
-    const selectedTopics = Array.from(document.querySelectorAll('input[name="topic"]:checked')).map(checkbox => checkbox.value);
-    const selectedAuthors = Array.from(document.querySelectorAll('input[name="author"]:checked')).map(checkbox => checkbox.value);
-    const selectedPublishers = Array.from(document.querySelectorAll('input[name="publisher"]:checked')).map(checkbox => checkbox.value);
+    let selectedPrice, selectedGenres;
 
-    let filteredBooks = books;
-
-    // Filter by type
-    if (selectedType !== 'libros') {
-        filteredBooks = filteredBooks.filter(book => book.type === selectedType);
+    if (window.matchMedia("(max-width: 768px)").matches || (document.querySelector('.filter-mobile') && document.querySelector('.filter-mobile').style.display !== 'none')) {
+        selectedPrice = document.querySelector('input[name="price-mobile"]:checked')?.value || 'none';
+        selectedGenres = Array.from(document.querySelectorAll('input[name="genre-mobile"]:checked'))
+            .map(checkbox => checkbox.value);
+    } else {
+        selectedPrice = document.querySelector('input[name="price"]:checked')?.value || 'none';
+        selectedGenres = Array.from(document.querySelectorAll('input[name="genre"]:checked'))
+            .map(checkbox => checkbox.value);
     }
 
-    // Filter by topics
-    if (selectedTopics.length > 0) {
-        filteredBooks = filteredBooks.filter(book => book.topics.some(topic => selectedTopics.includes(topic)));
+    let minPrice = 0;
+    let maxPrice = 9999999;
+
+    if (selectedPrice !== 'none') {
+        if (selectedPrice.includes('+')) {
+            minPrice = parseInt(selectedPrice.split('+')[0], 10);
+        } else {
+            const [min, max] = selectedPrice.split(' - ').map(value => parseInt(value, 10));
+            minPrice = min;
+            maxPrice = max;
+        }
     }
 
-    // Filter by authors
-    if (selectedAuthors.length > 0) {
-        filteredBooks = filteredBooks.filter(book => selectedAuthors.includes(book.author.toLowerCase().replace(/\s+/g, '-')));
-    }
+    const genreParams = selectedGenres.map(genre => `genre=${encodeURIComponent(genre)}`).join('&');
 
-    // Filter by publishers
-    if (selectedPublishers.length > 0) {
-        filteredBooks = filteredBooks.filter(book => selectedPublishers.includes(book.publisher.toLowerCase().replace(/\s+/g, '-')));
-    }
+    const queryParams = [
+        `min=${minPrice}`,
+        `max=${maxPrice}`,
+        genreParams
+    ].filter(param => param).join('&');
 
-    renderBooks(filteredBooks);
+    const url = `https://library-api-0e3t.onrender.com/books?${queryParams}`;
+
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(books => {
+            return books;
+        })
+        .catch(error => {
+            console.error('Error fetching books:', error);
+            return [];
+        });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -353,7 +403,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (filterInputs) {
         filterInputs.forEach(input => {
             input.addEventListener('change', () => {
-                applyFilters();
+                applyFilters().then(
+                    books => {
+                        renderBooks(books);
+
+                        const sortSelect = document.getElementById('sort-select');
+                        if (sortSelect) {
+                            sortSelect.selectedIndex = 0;
+                        }
+                    }
+                ).catch(
+                    error => console.error('Error applying filters:', error)
+                );
             });
         });
     }
