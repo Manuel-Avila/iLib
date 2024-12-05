@@ -1,27 +1,7 @@
 function initializeList(listName) {
     if (!localStorage.getItem(listName)) {
-        localStorage.setItem(listName, JSON.stringify([]));
+        localStorage.setItem(listName, JSON.stringify({}));
     }
-}
-
-function addToList(listName, id) {
-    initializeList(listName);
-    const list = JSON.parse(localStorage.getItem(listName));
-    const stringId = String(id);
-
-    if (!list.includes(stringId)) {
-        list.push(stringId);
-        localStorage.setItem(listName, JSON.stringify(list));
-    }
-}
-
-function removeFromList(listName, id) {
-    initializeList(listName);
-    const list = JSON.parse(localStorage.getItem(listName));
-    const stringId = String(id);
-
-    const updatedList = list.filter(item => item !== stringId);
-    localStorage.setItem(listName, JSON.stringify(updatedList));
 }
 
 function getList(listName) {
@@ -29,17 +9,34 @@ function getList(listName) {
     return JSON.parse(localStorage.getItem(listName));
 }
 
-function isInList(listName, id) {
+function addObjectToList(listName, key, value) {
     initializeList(listName);
     const list = JSON.parse(localStorage.getItem(listName));
-    return list.includes(String(id));
+
+    if (!list.hasOwnProperty(key)) {
+        list[key] = value;
+        localStorage.setItem(listName, JSON.stringify(list));
+    }
+}
+
+function removeObjectFromList(listName, key) {
+    initializeList(listName);
+    const list = JSON.parse(localStorage.getItem(listName));
+
+    delete list[key];
+    localStorage.setItem(listName, JSON.stringify(list));
+}
+
+function isObjectInList(listName, key) {
+    initializeList(listName);
+    const list = JSON.parse(localStorage.getItem(listName));
+    return list.hasOwnProperty(key);
 }
 
 function toggleSection(sectionId) {
     const content = document.getElementById(sectionId);
     const button = content.previousElementSibling;
     const allContents = document.querySelectorAll('.collapse-content');
-    const allButtons = document.querySelectorAll('.collapse-btn');
 
     // Close all other sections
     allContents.forEach(item => {
@@ -101,13 +98,13 @@ function renderBooks(booksToRender) {
                         <p class="book-publisher">${convertDate(book.release_date)}</p>
                         <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
                         <p class="book-price">$${book.price}</p>
+                        </a>
                         <button class="add-to-cart">Agregar a mi bolsa</button>
                     </div>
-                </a>
         `;
         bookGrid.appendChild(bookCard);
 
-        if (isInList('favoriteBooks', book.id)) {
+        if (isObjectInList('favoriteBooks', book.id)) {
             bookCard.querySelector('.favorite-btn i').classList.add('fas');
         }
     });
@@ -127,7 +124,6 @@ function sortBooks(sortBy) {
                 sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
                 break;
             default:
-                // For 'release-date' or any other option, we'll use the default order
                 break;
         }
 
@@ -332,9 +328,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         favoriteButton.classList.toggle('active');
 
                         if (favoriteButton.classList.contains('active')) {
-                            addToList('favoriteBooks', card.dataset.id);
+                            addObjectToList('favoriteBooks', card.dataset.id, {});
                         } else {
-                            removeFromList('favoriteBooks', card.dataset.id);
+                            removeObjectFromList('favoriteBooks', card.dataset.id, {});
                         }
                     });
                 }
@@ -409,9 +405,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.classList.toggle('far');
 
                 if (icon.classList.contains('fas')) {
-                    addToList('favoriteBooks', btn.dataset.id);
+                    addObjectToList('favoriteBooks', btn.dataset.id, {});
                 } else {
-                    removeFromList('favoriteBooks', btn.dataset.id);
+                    removeObjectFromList('favoriteBooks', btn.dataset.id, {});
                 }
             }
         });

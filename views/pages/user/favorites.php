@@ -144,11 +144,10 @@
                     return response.json();
                 })
                 .then(books => {
-                    const favs = getList("favoriteBooks");
                     let favorites = [];
 
                     if (books.length > 0) {
-                        favorites = books.filter(book => favs.includes(book.id));
+                        favorites = books.filter(book => isObjectInList("favoriteBooks", book.id));
                     }
 
                     favoritesContainer.innerHTML = '';
@@ -181,12 +180,20 @@
         }
 
         function removeItem(id) {
-            removeFromList("favoriteBooks", id);
+            removeObjectFromList("favoriteBooks", id);
             renderFavorites();
         }
 
         function addToCart(id) {
-            addToList("cartBooks", id);
+            let count = 1;
+
+            if (isObjectInList("cartBooks", id)) {
+                const item = getList("cartBooks", id);
+                count = item[id].quantity + 1;
+            }
+
+            removeObjectFromList("cartBooks", id);
+            addObjectToList("cartBooks", id, { quantity: count });
         }
 
         favoritesContainer.addEventListener('click', function(e) {

@@ -181,11 +181,10 @@
                     return response.json();
                 })
                 .then(books => {
-                    const carts = getList("cartBooks");
                     let cart = [];
 
                     if (books.length > 0) {
-                        cart = books.filter(book => carts.includes(book.id));
+                        cart = books.filter(book => isObjectInList("cartBooks", book.id));
                     }
 
                     cartItemsContainer.innerHTML = '';
@@ -194,25 +193,26 @@
                         checkoutButton.style.display = 'none';
                     } else {
                         cart.forEach(item => {
-                            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                            const carts = getList("cartBooks", item.id);
+                            const total = cart.reduce((sum, item) => sum + item.price * carts[item.id].quantity, 0);
                             cartTotalElement.textContent = `$${total.toFixed(2)}`;
 
                             const itemElement = document.createElement('div');
                             itemElement.className = 'cart-item';
                             itemElement.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}">
-                    <div class="item-details">
-                        <h3 class="item-title">${item.title}</h3>
-                        <p class="item-author">${item.author}</p>
-                        <p class="item-price">$${item.price.toFixed(2)}</p>
-                    </div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                    </div>
-                    <button class="remove-btn" data-id="${item.id}">Eliminar</button>
-                `;
+                                        <img src="${item.image}" alt="${item.title}">
+                                        <div class="item-details">
+                                            <h3 class="item-title">${item.title}</h3>
+                                            <p class="item-author">${item.author}</p>
+                                            <p class="item-price">$${item.price.toFixed(2)}</p>
+                                        </div>
+                                        <div class="quantity-controls">
+                                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                            <span class="quantity">${carts[item.id].quantity}</span>
+                                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                        </div>
+                                        <button class="remove-btn" data-id="${item.id}">Eliminar</button>
+                                    `;
                             cartItemsContainer.appendChild(itemElement);
                         });
                         checkoutButton.style.display = 'inline-block';
@@ -227,19 +227,21 @@
         }
 
         function updateQuantity(id, change) {
-            const item = cart.find(item => item.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeItem(id);
-                } else {
-                    renderCart();
-                }
+            const carts = getList("cartBooks", id);
+            const item = carts[id];
+
+            let count = item.quantity + change;
+            if (count <= 0) {
+                removeItem(id);
+            } else {
+                removeObjectFromList("cartBooks", id);
+                addObjectToList("cartBooks", id, { quantity: count });
+                renderCart();
             }
         }
 
         function removeItem(id) {
-            removeFromList("cartBooks", id);
+            removeObjectFromList("cartBooks", id);
             renderCart();
         }
 
