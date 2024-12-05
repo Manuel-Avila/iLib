@@ -9,14 +9,6 @@
     <?php include_once "../partials/head.php"; ?>
 
     <style>
-        /* Estilos generales */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-
         a {
             color: #780828;
             text-decoration: none;
@@ -188,7 +180,8 @@
     </section>
 </main>
 
-<?php include_once "../partials/footer.php";?>
+<?php include_once "../partials/footer.php"; ?>
+<?php include_once "../partials/scripts.php"; ?>
 </body>
 </html>
 
