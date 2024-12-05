@@ -16,11 +16,14 @@
             "Content-Type: application/json"
         ]);
 
-        if ($user[0]['role'] === 'user') {
-            header('Location: ' . BASE_PATH . 'error?code=401');
-            return;
+        if (strpos($_SERVER['REQUEST_URI'], BASE_PATH . 'panel') !== false) {
+            if ($user[0]['role'] === 'user') {
+                header('Location: ' . BASE_PATH . 'error?code=401');
+                return;
+            }
         }
 
     } catch (Exception $e) {
         header('Location: ' . BASE_PATH . 'login');
+        setcookie('user_token', '', time() - 3600, '/');
     }

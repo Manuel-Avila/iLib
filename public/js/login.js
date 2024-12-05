@@ -60,7 +60,13 @@ if (loginBt) {
 
             await response.json();
             setCookie("user_token", idToken);
-            alertify.alert('Exito', 'Se inicio sesion correctamente.');
+
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+
+            alertify.alert('Exito', 'Se inicio sesion correctamente.', () => {
+                window.location.reload();
+            });
         } catch (error) {
             alertify.alert('Error', 'Correo o contraseña incorrectos.');
         }
@@ -102,7 +108,13 @@ if (registerBt) {
                 }),
             });
 
-            const data = await response.json();
+            await response.json();
+
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("confirm-password").value = "";
+
             alertify.alert('Exito', 'Se registro correctamente.');
         } catch (error) {
             alertify.alert('Error', 'Algo salio mal.');
@@ -139,7 +151,9 @@ if (googleBt) {
 
             await response.json();
             setCookie("user_token", idToken);
-            alertify.alert('Exito', 'Se inicio sesion correctamente.');
+            alertify.alert('Exito', 'Se inicio sesion correctamente.', () => {
+                window.location.reload();
+            });
         } catch (error) {
             alertify.alert('Error', 'Algo salio mal.');
         }
@@ -161,6 +175,8 @@ if (forgotPassword) {
             await sendPasswordResetEmail(auth, email)
                 .then(() => {
                     alertify.alert('Exito', 'Se envio un correo para restablecer tu contraseña.');
+
+                    document.getElementById("email").value = "";
                 })
                 .catch((error) => {
                     alertify.alert('Error', 'Error al enviar el correo para restablecer tu contraseña.');

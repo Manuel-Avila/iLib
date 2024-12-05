@@ -28,6 +28,7 @@
         <a href="<?=BASE_PATH?>" style="text-decoration: none; color: #780828; font-weight: bold; border: 1px solid #780828; padding: 0.5rem 1rem; border-radius: 4px; transition: background-color 0.3s, color 0.3s;">Volver a Inicio</a>
     </div>
     <?php include_once "../../partials/footer.php";?>
+    <?php include_once "../../partials/scripts.php";?>
 </body>
 </html>
 
