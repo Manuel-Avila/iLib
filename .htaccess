@@ -2,20 +2,20 @@ Options +FollowSymLinks -MultiViews -Indexes
 RewriteEngine on
 
 # PAGES
-RewriteRule ^/?$ views/pages/index.php
+RewriteRule ^/?$ views/pages/index.php [L]
 
-# BOOKS
+RewriteRule ^login/?$ views/pages/auth/login.php [L]
+RewriteRule ^register/?$ views/pages/auth/register.php [L]
+RewriteRule ^forgot-password/?$ views/pages/auth/forgot-password.php [L]
+
 RewriteRule ^books/(.+)/?$ views/pages/books/book-details.php?id=$1 [L]
 RewriteRule ^books/?$ views/pages/books/books.php [L]
 
-# ERRORS
-RewriteRule ^error/?$ views/pages/errors/error.php
+RewriteRule ^panel/?$ views/pages/admin/panel.php [L]
 
-# LOGIN
-RewriteRule ^login/?$ views/pages/login.php [L]
+# ERROR HANDLING
+RewriteRule ^error/?$ views/pages/errors/error.php [L]
 
-# REGISTER
-RewriteRule ^register/?$ views/pages/register.php [L]
-
-# FORGOT-PASSWORD
-RewriteRule ^forgot-password/?$ views/pages/forgot-password.php [L]
+ErrorDocument 404 http://localhost:8888/iLib/error?code=404
+ErrorDocument 403 http://localhost:8888/iLib/error?code=403
+ErrorDocument 500 http://localhost:8888/iLib/error?code=500

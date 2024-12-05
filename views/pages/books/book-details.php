@@ -99,6 +99,11 @@
                             <span class="characteristic-label">ISBN:</span>
                             <span class="characteristic-value"> <?= $book["isbn"] ?> </span>
                         </div>
+                        <div class="characteristic-item">
+                            <span class="characteristic-icon">🔴</span>
+                            <span class="characteristic-label">Generos:</span>
+                            <span class="characteristic-value"> <?= join(', ', $book["genre"]) ?> </span>
+                        </div>
                     </div>
                 </div>
             </div>

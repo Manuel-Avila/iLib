@@ -16,13 +16,18 @@ final class ApiHandler {
     public function makeRequest(
         string $endpoint,
         string $method = 'GET',
-        array $data = []
-    ) : array {
+        array $data = [],
+        array $headers = []
+    ): array {
         $url = $this->apiBaseUrl . $endpoint;
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        if (!empty($headers)) {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        }
 
         if ($method === 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);

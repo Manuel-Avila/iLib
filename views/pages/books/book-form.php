@@ -1,6 +1,5 @@
 <?php 
     require_once __DIR__ . "/../../../app/config.php";
-    require_once __DIR__ . "/../../../app/util/admin-auth.php";
     require_once __DIR__ . "/../../../app/BooksController.php";
     require_once __DIR__ . "/../../../app/GenreController.php";
 

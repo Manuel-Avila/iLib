@@ -3,7 +3,7 @@
 
     header("X-XSS-Protection: 1; mode=block");
 
-    if (!isset($_SESSION)) {
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 

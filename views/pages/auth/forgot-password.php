@@ -15,7 +15,7 @@ define('BASE_PATH', '/iLib/');
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('public/img/backgroundLogin.jpeg');
+            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('<?=BASE_PATH?>public/img/backgroundLogin.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -138,10 +138,19 @@ define('BASE_PATH', '/iLib/');
             }
         }
     </style>
+
+    <!-- Enlace al CSS de Alertify.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
+    <!-- Enlace a los estilos temáticos de Alertify.js (opcional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+    <!-- Enlace al JavaScript de Alertify.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </head>
 <body>
     <div class="forgot-password-container">
-        <img src="public/img/logo.png" alt="Logo" class="logo">
+        <img src="<?=BASE_PATH?>public/img/logo.png" alt="Logo" class="logo">
         <h1>¿Olvidaste tu contraseña?</h1>
         <p>Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.</p>
         <form>
@@ -155,12 +164,14 @@ define('BASE_PATH', '/iLib/');
                 autocomplete="email"
             >
             
-            <button type="submit" class="primary-button">Enviar instrucciones</button>
+            <button id="forgot-bt" class="primary-button">Enviar instrucciones</button>
         </form>
 
         <div class="links">
             <a href="<?=BASE_PATH?>login">Volver a Iniciar Sesión</a>
         </div>
     </div>
+
+    <script type="module"  src="<?=BASE_PATH?>public/js/login.js"></script>
 </body>
 </html>
