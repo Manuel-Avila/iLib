@@ -11,7 +11,11 @@ RewriteRule ^forgot-password/?$ views/pages/auth/forgot-password.php [L]
 RewriteRule ^books/(.+)/?$ views/pages/books/book-details.php?id=$1 [L]
 RewriteRule ^books/?$ views/pages/books/books.php [L]
 
+RewriteRule ^user/?$ views/pages/user/user.php [L]
 RewriteRule ^panel/?$ views/pages/admin/panel.php [L]
+
+# CONTROLLERS
+RewriteRule ^logout$ app/logout.php
 
 # ERROR HANDLING
 RewriteRule ^error/?$ views/pages/errors/error.php [L]

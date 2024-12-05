@@ -1,5 +1,10 @@
 <?php
-define('BASE_PATH', '/iLib/'); 
+    include_once "../../../app/config.php";
+
+    if (isset($_COOKIE['user_token'])) {
+        header('Location: ' . BASE_PATH . 'user');
+        return;
+    }
 ?>
 
 <!DOCTYPE html>
