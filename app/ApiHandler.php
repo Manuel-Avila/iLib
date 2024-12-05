@@ -31,7 +31,7 @@ final class ApiHandler {
 
         if ($method === 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
         } elseif ($method === 'PATCH') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));

@@ -48,8 +48,12 @@ final class BooksController {
             'genre' => $genre,
         ];
 
+        $headers = [
+            'Content-Type: application/json'
+        ];
+
         try {
-            return $this->apiHandler->makeRequest('/books', 'POST', $data);
+            return $this->apiHandler->makeRequest('/books', 'POST', $data, $headers);
         } catch (Exception $e) {
             return [];
         }
