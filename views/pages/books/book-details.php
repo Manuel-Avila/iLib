@@ -27,8 +27,8 @@
 
 <html lang="es">
     <head>
-        <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
         <?php include_once "../../partials/head.php"; ?>
+        <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
     </head>
 
     <body>
@@ -114,30 +114,21 @@
         <?php if(!empty($booksAuthor)): ?>
             <section class="book-section">
                 <div class="section-header">
-                    <h2>Mas libros por el autor</h2>
+                    <h2>Mas libros del autor</h2>
                     <div class="scroll-buttons">
                         <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
                         <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
                     </div>
                 </div>
                 <div class="book-slider">
-                    <?php foreach($booksAuthor as $bookAuthor): ?>
+                    <?php foreach ($booksAuthor as $book): ?>
                         <div class="book-card">
-                            <div class="book-cover">
-                                <img src="<?= BASE_PATH ?>public/img/books/<?= $bookAuthor["id"] ?>.jpg" alt="<?= $bookAuthor["title"] ?>">
-                                <button class="favorite-btn" data-id="<?= $bookAuthor["id"] ?>">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <a href="<?= BASE_PATH ?>books/<?= $bookAuthor["id"] ?>" style="text-decoration: none; color: black">
-                                <div class="book-info">
-                                    <h2 class="book-title"><?= $bookAuthor["title"] ?></h2>
-                                    <p class="book-author"><?= $bookAuthor["author"] ?></p>
-                                    <p class="book-publisher"><?= convertDate($bookAuthor["release_date"]) ?></p>
-                                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
-                                    <p class="book-price">$<?= $bookAuthor["price"] ?></p>
-                                    <button class="add-to-cart">Agregar a mi bolsa</button>
-                                </div>
+                            <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
+                                <h3><?=$book['title']?></h3>
+                                <p class="author"><?=$book['author']?></p>
+                                <p class="price">$<?=$book['price']?></p>
+                                <button class="add-to-cart" data-id="<?= $book['id'] ?>">Agregar al carrito</button>
                             </a>
                         </div>
                     <?php endforeach; ?>
@@ -148,30 +139,21 @@
         <?php if(!empty($booksSimilar)): ?>
             <section class="book-section">
                 <div class="section-header">
-                    <h2>Libros relacionados</h2>
+                    <h2>Libros Similares</h2>
                     <div class="scroll-buttons">
                         <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
                         <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
                     </div>
                 </div>
                 <div class="book-slider">
-                    <?php foreach($booksSimilar as $bookSimilar): ?>
+                    <?php foreach ($booksSimilar as $book): ?>
                         <div class="book-card">
-                            <div class="book-cover">
-                                <img src="<?= BASE_PATH ?>public/img/books/<?= $bookSimilar["id"] ?>.jpg" alt="<?= $bookSimilar["title"] ?>">
-                                <button class="favorite-btn" data-id="<?= $bookSimilar["id"] ?>">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <a href="<?= BASE_PATH ?>books/<?= $bookSimilar["id"] ?>" style="text-decoration: none; color: black">
-                                <div class="book-info">
-                                    <h2 class="book-title"><?= $bookSimilar["title"] ?></h2>
-                                    <p class="book-author"><?= $bookSimilar["author"] ?></p>
-                                    <p class="book-publisher"><?= convertDate($bookSimilar["release_date"]) ?></p>
-                                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
-                                    <p class="book-price">$<?= $bookSimilar["price"] ?></p>
-                                    <button class="add-to-cart">Agregar a mi bolsa</button>
-                                </div>
+                            <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
+                                <h3><?=$book['title']?></h3>
+                                <p class="author"><?=$book['author']?></p>
+                                <p class="price">$<?=$book['price']?></p>
+                                <button class="add-to-cart" data-id="<?= $book['id'] ?>">Agregar al carrito</button>
                             </a>
                         </div>
                     <?php endforeach; ?>
