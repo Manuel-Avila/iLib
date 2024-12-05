@@ -1,8 +1,8 @@
 :root {
     --dark-red: #780828;
     --red-hover: #951237;
-    --green-color: #30b43d;
-    --green-hover: #32c440;
+    --gray-button: #d0cece;
+    --gray-hover: #c3bfbf; 
 }
 
 /* Reset y estilos base */
@@ -16,6 +16,67 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: #333;
+}
+
+/* Confirm-Modal */
+
+.dark-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.5);
+    z-index: 1200;
+    display: none;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+}
+
+.confirm-modal {
+    max-width: 500px;
+    min-width: 300px;
+    width: 70%;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    z-index: 1300;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.modal-icon {
+    width: 50px;
+}
+
+#accept-modal-button {
+    background-color: var(--dark-red);
+    color: white;
+    margin-top: 25px;
+}
+
+#accept-modal-button:hover { 
+    background-color: var(--red-hover);
+}
+
+#cancel-button:hover {
+    background-color: var(--gray-hover);
+}
+
+.confirm-modal button {
+    margin-top: 10px;
+    width: 80%;
+    transition: transform 0.3s;
+}
+
+.confirm-modal button:hover {
+    transform: translateY(-2px);
 }
 
 /* Header y navegación */

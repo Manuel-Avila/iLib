@@ -3,7 +3,9 @@
     include_once "../../../app/BooksController.php";
 
     $bookController = new BooksController();
+    $controllerPath = '';
     $books = $bookController->getBooks();
+    $modalMessage = 'Al presionar el boton aceptar no sera posible recuperar el libro eliminado';
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +16,8 @@
     <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/custom-checkboxes.css">
 </head>
 <body>
-<?php include_once "../../partials/header.php"; ?>
-
+    <?php include_once "../../partials/header.php"; ?>
+    <?php include_once VIEWS_PATH . "/partials/confirm-modal.php" ?>
 <div class="container">
     <!-- Desktop Sidebar -->
     <aside class="desktop-sidebar">
@@ -206,8 +208,8 @@
                         </a>
                         <div class="book-options">
                             <?php /*Delete*/$_SESSION['user_role'] = 'admin'; /*Delete*/ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') : ?>
-                                <a class="button edit-button" href="<?= BASE_PATH ?>views/pages/books/book-form.php?book_id=<?= $book["id"]; ?>">Editar</a>
-                                <a class="button delete-button">Eliminar</a>
+                                <a class="button edit-button" id="edit-button" href="<?= BASE_PATH ?>views/pages/books/book-form.php?book_id=<?= $book["id"]; ?>">Editar</a>
+                                <button onclick="sendToUrl('<?= BASE_PATH ?>app/BooksController.php?action=delete&book_id=<?=$book['id']?>');" class="button delete-button">Eliminar</button>
                             <?php else: ?>
                                 <button class="add-to-cart">Agregar a mi bolsa</button>
                             <?php endif; ?>

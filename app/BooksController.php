@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once 'ApiHandler.php';
+require_once __DIR__ . '/GenreController.php';
 
 final class BooksController {
 
@@ -107,5 +108,39 @@ final class BooksController {
         } catch (Exception $e) {
             return [];
         }
+    }
+}
+
+function addBook() {
+    $genreController = new GenreController();
+    $genres = $genreController->getGenres();
+    $genreTitles = [];
+    
+    foreach($genres as $genre) {
+        $genreTitle = $genre['name'];
+        if (isset($_POST[$genreTitle])) {
+            $genreTitles[] = $genreTitle;
+        }
+    }
+
+    
+}
+
+function updateBook() {
+    echo 'updateasdfasdfasdf';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['book_id'])) {
+        updateBook();
+        exit();
+    }
+    addBook();
+} else {
+    if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+        $booksController = new BooksController();
+        $booksController->deleteBook($_GET['book_id']);
+        $previousPage = $_SERVER['HTTP_REFERER'];
+        header("Location: $previousPage");
     }
 }
