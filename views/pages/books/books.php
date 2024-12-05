@@ -2,6 +2,7 @@
     include_once "../../../app/config.php";
     include_once "../../../app/BooksController.php";
     include_once "../../../app/GenreController.php";
+    require_once __DIR__ . "/../../../app/util/Utils.php";
 
     $bookController = new BooksController();
     $controllerPath = '';
@@ -97,7 +98,7 @@
                     <div class="book-card">
                         <a href="<?= BASE_PATH ?>books/<?= $book["id"] ?>" style="text-decoration: none; color: black;">
                             <div class="book-cover">
-                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] ?>.jpg" alt="<?= $book["title"] ?>">
+                            <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
                                 <button class="favorite-btn" data-id="<?= $book["id"] ?>">
                                     <i class="far fa-heart"></i>
                                 </button>

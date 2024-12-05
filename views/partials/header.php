@@ -23,8 +23,8 @@
                 <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div class="icons">
-                <a href="#favoritos" aria-label="Favoritos"><i class="fa-solid fa-star"></i></a>
-                <a href="#carrito" aria-label="Carrito"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<?=BASE_PATH?>favorites" aria-label="Favoritos"><i class="fa-solid fa-star"></i></a>
+                <a href="<?=BASE_PATH?>shopping-cart" aria-label="Carrito"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="<?=BASE_PATH?>login" aria-label="Mi cuenta"><i class="fa-solid fa-user"></i></a>
             </div>
             <button id="mobile-menu-btn" aria-label="Abrir menú">☰</button>

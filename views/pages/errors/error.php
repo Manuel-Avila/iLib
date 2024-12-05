@@ -1,4 +1,4 @@
-<?php
+user.php<?php
     include_once "../../../app/config.php";
 
     if (isset($_GET['code'])) {

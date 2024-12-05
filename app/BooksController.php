@@ -53,7 +53,6 @@ final class BooksController {
         try {
             return $this->apiHandler->makeRequest('/books', 'POST', $data);
         } catch (Exception $e) {
-            echo $e->getMessage();
             return [];
         }
     }
@@ -139,12 +138,16 @@ function addBook() {
         $genreTitles
     );
 
-    echo $bookId;
-    die();
+    if (isset($bookId['id'])) {
+        $bookId = $bookId['id'];
+    } else {
+        setErrorRedirect('Error al crear el libro');
+        return;
+    }
 
     if (saveImage("$bookId")) {
         $_SESSION['success'] = 'Se agrego el libro correctamente';
-        header("Location: " . VIEWS_PATH . "pages/admin/panel.php");
+        header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
     } else {
         redirect_back();
     }
@@ -185,6 +188,12 @@ function saveImage($book_id) {
     return false;
 }
 
+function deleteImage($imageName) {
+    $imageName.= getImageExtension($imageName);
+
+    unlink(__DIR__ . '/../public/img/books/' . $imageName);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     cleanPostInputs();
@@ -199,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['action']) && $_GET['action'] === 'delete') {
         $booksController = new BooksController();
         $booksController->deleteBook($_GET['book_id']);
+        deleteImage($_GET['book_id']);
         $previousPage = $_SERVER['HTTP_REFERER'];
         header("Location: $previousPage");
     }

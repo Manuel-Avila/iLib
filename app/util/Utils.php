@@ -35,3 +35,9 @@ function cleanPostInputs() {
         $_POST[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
     }
 }
+
+function getImageExtension($imageName) {
+    $image = glob(__DIR__ . "/../../public/img/books/$imageName.*");
+    $image = $image[0];
+    return "." . pathinfo($image, PATHINFO_EXTENSION);
+}
