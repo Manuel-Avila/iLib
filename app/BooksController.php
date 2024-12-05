@@ -123,7 +123,7 @@ function addBook() {
         }
     }
 
-    
+    var_dump($genreTitles);
 }
 
 function updateBook() {
