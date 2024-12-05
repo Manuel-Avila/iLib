@@ -2,7 +2,14 @@
     include_once "../../../app/config.php";
 
     if (isset($_GET['code'])) {
-        $error = 'Error ' .  $_GET['code'];
+        $error = match ($_GET['code']) {
+            '400' => 'Bad Request',
+            '401' => 'Unauthorized',
+            '403' => 'Forbidden',
+            '404' => 'Not Found',
+            '500' => 'Internal Server Error',
+            default => 'Error',
+        };
     } else {
         $error = 'Error';
     }

@@ -191,6 +191,15 @@ define('BASE_PATH', '/iLib/');
             }
         }
     </style>
+
+    <!-- Enlace al CSS de Alertify.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
+    <!-- Enlace a los estilos temáticos de Alertify.js (opcional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+    <!-- Enlace al JavaScript de Alertify.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </head>
 <body>
     <div class="register-container">
@@ -235,9 +244,9 @@ define('BASE_PATH', '/iLib/');
                 required
                 autocomplete="new-password"
             >
-            
-            <button type="submit" class="primary-button">Registrarse</button>
         </form>
+
+        <button id="register-bt" class="primary-button">Registrarse</button>
 
         <div class="divider">O</div>
 
@@ -250,6 +259,8 @@ define('BASE_PATH', '/iLib/');
             <a href="<?=BASE_PATH?>login">¿Ya tienes una cuenta? Inicia sesión</a>
         </div>
     </div>
+
+    <script type="module" src="<?=BASE_PATH?>public/js/login.js"></script>
 </body>
 </html>
 

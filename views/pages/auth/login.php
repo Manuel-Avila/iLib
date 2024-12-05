@@ -192,6 +192,15 @@ define('BASE_PATH', '/iLib/');
             }
         }
     </style>
+
+    <!-- Enlace al CSS de Alertify.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+
+    <!-- Enlace a los estilos temáticos de Alertify.js (opcional) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+    <!-- Enlace al JavaScript de Alertify.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -217,12 +226,12 @@ define('BASE_PATH', '/iLib/');
                 required
                 autocomplete="current-password"
             >
+
+            <button id="login-bt" class="primary-button">Iniciar Sesión</button>
             
             <div class="links">
                 <a href="<?=BASE_PATH?>forgot-password">¿Olvidaste tu contraseña?</a>
             </div>
-            
-            <button type="submit" class="primary-button">Iniciar Sesión</button>
             
 
             <div class="links" style="justify-content: center; margin-bottom: 15px;">
@@ -232,10 +241,12 @@ define('BASE_PATH', '/iLib/');
 
         <div class="divider">O</div>
 
-        <button class="google-button">
+        <button id="google-bt" class="google-button">
             <img src="https://www.google.com/favicon.ico" alt="Google" class="google-icon">
             Continuar con Google
         </button>
     </div>
+
+    <script type="module" src="<?=BASE_PATH?>public/js/login.js"></script>
 </body>
 </html>
