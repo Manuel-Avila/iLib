@@ -127,26 +127,39 @@
         <!-- Los items favoritos se insertarán aquí dinámicamente -->
     </div>
 </main>
+
+<?php include_once "../../partials/footer.php";?>
+<?php include_once "../../partials/scripts.php";?>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
         const favoritesContainer = document.getElementById('favorites-items');
 
-        let favorites = [
-            { id: 1, title: "Cien años de soledad", author: "Gabriel García Márquez", price: 299, image: "/placeholder.svg?height=120&width=80&text=Libro+1" },
-            { id: 2, title: "1984", author: "George Orwell", price: 249, image: "/placeholder.svg?height=120&width=80&text=Libro+2" },
-            { id: 3, title: "El principito", author: "Antoine de Saint-Exupéry", price: 199, image: "/placeholder.svg?height=120&width=80&text=Libro+3" }
-        ];
+        async function renderFavorites() {
+            await fetch('https://library-api-0e3t.onrender.com/books')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(books => {
+                    const favs = getList("favoriteBooks");
+                    let favorites = [];
 
-        function renderFavorites() {
-            favoritesContainer.innerHTML = '';
-            if (favorites.length === 0) {
-                favoritesContainer.innerHTML = '<div class="empty-favorites">No tienes libros favoritos</div>';
-            } else {
-                favorites.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'favorite-item';
-                    itemElement.innerHTML = `
-                    <img src="${item.image}" alt="${item.title}">
+                    if (books.length > 0) {
+                        favorites = books.filter(book => favs.includes(book.id));
+                    }
+
+                    favoritesContainer.innerHTML = '';
+                    if (favorites.length === 0) {
+                        favoritesContainer.innerHTML = '<div class="empty-favorites">No tienes libros favoritos</div>';
+                    } else {
+                        favorites.forEach(item => {
+                            const itemElement = document.createElement('div');
+                            itemElement.className = 'favorite-item';
+                            itemElement.innerHTML = `
+                    <img src="public/img/books/${item.id}.jpg" alt="${item.title}">
                     <div class="item-details">
                         <h3 class="item-title">${item.title}</h3>
                         <p class="item-author">${item.author}</p>
@@ -157,30 +170,31 @@
                         <button class="btn remove-btn" data-id="${item.id}">Eliminar</button>
                     </div>
                 `;
-                    favoritesContainer.appendChild(itemElement);
+                            favoritesContainer.appendChild(itemElement);
+                        });
+                    }
+                })
+                .catch(error => {
+                    favoritesContainer.innerHTML = '';
+                    favoritesContainer.innerHTML = '<div class="empty-favorites">Error</div>';
                 });
-            }
         }
 
         function removeItem(id) {
-            favorites = favorites.filter(item => item.id !== id);
+            removeFromList("favoriteBooks", id);
             renderFavorites();
         }
 
         function addToCart(id) {
-            const item = favorites.find(item => item.id === id);
-            if (item) {
-                alert(`"${item.title}" ha sido agregado al carrito.`);
-                // Aquí iría la lógica para agregar el item al carrito
-            }
+            addToList("cartBooks", id);
         }
 
         favoritesContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-btn')) {
-                const id = parseInt(e.target.dataset.id);
+                const id = e.target.dataset.id;
                 removeItem(id);
             } else if (e.target.classList.contains('add-to-cart-btn')) {
-                const id = parseInt(e.target.dataset.id);
+                const id = e.target.dataset.id;
                 addToCart(id);
             }
         });
@@ -188,8 +202,5 @@
         renderFavorites();
     });
 </script>
-
-<?php include_once "../../partials/footer.php";?>
-<?php include_once "../../partials/scripts.php";?>
 </body>
 </html>

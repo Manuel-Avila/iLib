@@ -162,27 +162,44 @@
         <button id="checkout-button" class="btn btn-primary">Proceder al Pago</button>
     </div>
 </main>
+
+<?php include_once "../../partials/footer.php";?>
+<?php include_once "../../partials/scripts.php";?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartTotalElement = document.getElementById('cart-total');
         const checkoutButton = document.getElementById('checkout-button');
 
-        let cart = [
-            { id: 1, title: "Cien años de soledad", author: "Gabriel García Márquez", price: 299, quantity: 1, image: "/placeholder.svg?height=120&width=80&text=Libro+1" },
-            { id: 2, title: "1984", author: "George Orwell", price: 249, quantity: 2, image: "/placeholder.svg?height=120&width=80&text=Libro+2" }
-        ];
+        async function renderCart() {
+            await fetch('https://library-api-0e3t.onrender.com/books')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(books => {
+                    const carts = getList("cartBooks");
+                    let cart = [];
 
-        function renderCart() {
-            cartItemsContainer.innerHTML = '';
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
-                checkoutButton.style.display = 'none';
-            } else {
-                cart.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'cart-item';
-                    itemElement.innerHTML = `
+                    if (books.length > 0) {
+                        cart = books.filter(book => carts.includes(book.id));
+                    }
+
+                    cartItemsContainer.innerHTML = '';
+                    if (cart.length === 0) {
+                        cartItemsContainer.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+                        checkoutButton.style.display = 'none';
+                    } else {
+                        cart.forEach(item => {
+                            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                            cartTotalElement.textContent = `$${total.toFixed(2)}`;
+
+                            const itemElement = document.createElement('div');
+                            itemElement.className = 'cart-item';
+                            itemElement.innerHTML = `
                     <img src="${item.image}" alt="${item.title}">
                     <div class="item-details">
                         <h3 class="item-title">${item.title}</h3>
@@ -196,16 +213,17 @@
                     </div>
                     <button class="remove-btn" data-id="${item.id}">Eliminar</button>
                 `;
-                    cartItemsContainer.appendChild(itemElement);
-                });
-                checkoutButton.style.display = 'inline-block';
-            }
-            updateTotal();
-        }
+                            cartItemsContainer.appendChild(itemElement);
+                        });
+                        checkoutButton.style.display = 'inline-block';
+                    }
 
-        function updateTotal() {
-            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            cartTotalElement.textContent = `$${total.toFixed(2)}`;
+                })
+                .catch(error => {
+                    cartItemsContainer.innerHTML = '<div class="empty-cart">Error</div>';
+                    checkoutButton.style.display = 'none';
+                    cartTotalElement.textContent = `$0.00`;
+                });
         }
 
         function updateQuantity(id, change) {
@@ -221,31 +239,28 @@
         }
 
         function removeItem(id) {
-            cart = cart.filter(item => item.id !== id);
+            removeFromList("cartBooks", id);
             renderCart();
         }
 
         cartItemsContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('quantity-btn')) {
-                const id = parseInt(e.target.dataset.id);
+                const id = e.target.dataset.id;
                 const change = e.target.classList.contains('plus') ? 1 : -1;
                 updateQuantity(id, change);
             } else if (e.target.classList.contains('remove-btn')) {
-                const id = parseInt(e.target.dataset.id);
+                const id = e.target.dataset.id;
                 removeItem(id);
             }
         });
 
         checkoutButton.addEventListener('click', function() {
             alert('Procediendo al pago...');
-            // Aquí iría la lógica para proceder al pago
+
         });
 
         renderCart();
     });
 </script>
-
-<?php include_once "../../partials/footer.php";?>
-<?php include_once "../../partials/scripts.php";?>
 </body>
 </html>

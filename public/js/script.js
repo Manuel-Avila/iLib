@@ -1,3 +1,40 @@
+function initializeList(listName) {
+    if (!localStorage.getItem(listName)) {
+        localStorage.setItem(listName, JSON.stringify([]));
+    }
+}
+
+function addToList(listName, id) {
+    initializeList(listName);
+    const list = JSON.parse(localStorage.getItem(listName));
+    const stringId = String(id);
+
+    if (!list.includes(stringId)) {
+        list.push(stringId);
+        localStorage.setItem(listName, JSON.stringify(list));
+    }
+}
+
+function removeFromList(listName, id) {
+    initializeList(listName);
+    const list = JSON.parse(localStorage.getItem(listName));
+    const stringId = String(id);
+
+    const updatedList = list.filter(item => item !== stringId);
+    localStorage.setItem(listName, JSON.stringify(updatedList));
+}
+
+function getList(listName) {
+    initializeList(listName);
+    return JSON.parse(localStorage.getItem(listName));
+}
+
+function isInList(listName, id) {
+    initializeList(listName);
+    const list = JSON.parse(localStorage.getItem(listName));
+    return list.includes(String(id));
+}
+
 function toggleSection(sectionId) {
     const content = document.getElementById(sectionId);
     const button = content.previousElementSibling;
@@ -48,26 +85,31 @@ function renderBooks(booksToRender) {
 
     booksToRender.forEach(book => {
         const bookCard = document.createElement('div');
+
         bookCard.className = 'book-card';
         bookCard.innerHTML = `
-            <a href="http://localhost:8888/iLib/books/${book.id}" style="text-decoration: none; color: black;">
                 <div class="book-cover">
-                    <img src="http://localhost:8888/iLib/public/img/books/${book.id}.jpg" alt="${book.title}">
+                    <img src="public/img/books/${book.id}.jpg" alt="${book.title}">
                     <button class="favorite-btn" data-id="${book.id}">
                         <i class="far fa-heart"></i>
                     </button>
                 </div>
-                <div class="book-info">
-                    <h2 class="book-title">${book.title}</h2>
-                    <p class="book-author">${book.author}</p>
-                    <p class="book-publisher">${convertDate(book.release_date)}</p>
-                    <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
-                    <p class="book-price">$${book.price}</p>
-                    <button class="add-to-cart">Agregar a mi bolsa</button>
-                </div>
-            </a>
+                <a href="books/${book.id}" style="text-decoration: none; color: black;">
+                    <div class="book-info">
+                        <h2 class="book-title">${book.title}</h2>
+                        <p class="book-author">${book.author}</p>
+                        <p class="book-publisher">${convertDate(book.release_date)}</p>
+                        <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
+                        <p class="book-price">$${book.price}</p>
+                        <button class="add-to-cart">Agregar a mi bolsa</button>
+                    </div>
+                </a>
         `;
         bookGrid.appendChild(bookCard);
+
+        if (isInList('favoriteBooks', book.id)) {
+            bookCard.querySelector('.favorite-btn i').classList.add('fas');
+        }
     });
 }
 
@@ -146,6 +188,9 @@ function applyFilters() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    initializeList('favoriteBooks');
+    initializeList('cartBooks');
+
     // Slider functionality
     const slider = document.querySelector('.slides');
     const slides = document.querySelectorAll('.slide');
@@ -285,6 +330,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     favoriteButton.addEventListener('click', (e) => {
                         e.preventDefault();
                         favoriteButton.classList.toggle('active');
+
+                        if (favoriteButton.classList.contains('active')) {
+                            addToList('favoriteBooks', card.dataset.id);
+                        } else {
+                            removeFromList('favoriteBooks', card.dataset.id);
+                        }
                     });
                 }
             });
@@ -325,7 +376,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Books
-    //renderBooks(books);
+
+    if (document.getElementById('book-grid')) {
+        applyFilters().then(
+            books => {
+                renderBooks(books);
+
+                const sortSelect = document.getElementById('sort-select');
+                if (sortSelect) {
+                    sortSelect.selectedIndex = 0;
+                }
+            }
+        ).catch(
+            error => console.error('Error applying filters:', error)
+        );
+    }
+
     const sortSelect = document.getElementById('sort-select');
     if (sortSelect) {
         sortSelect.addEventListener('change', (e) => {
@@ -341,6 +407,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const icon = btn.querySelector('i');
                 icon.classList.toggle('fas');
                 icon.classList.toggle('far');
+
+                if (icon.classList.contains('fas')) {
+                    addToList('favoriteBooks', btn.dataset.id);
+                } else {
+                    removeFromList('favoriteBooks', btn.dataset.id);
+                }
             }
         });
     }
