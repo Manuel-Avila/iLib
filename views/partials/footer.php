@@ -11,27 +11,24 @@
         <div class="footer-section">
             <h3>Descubrir</h3>
             <ul>
-                <li><a href="#libros">Libros</a></li>
-                <li><a href="#categorias">Categorias</a></li>
-                <li><a href="#autores">Autores</a></li>
-                <li><a href="#ayudas">Ayuda</a></li>
+                <li><a href="<?=BASE_PATH?>books">Libros</a></li>
+                <li><a href="#categorias">Saga semanal</a></li>
+                <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>Informacion</h3>
             <ul>
-                <li><a href="#acerca">Acerca de iLib</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#privacidad">Aviso de privacidad</a></li>
+                <li><a href="<?=BASE_PATH?>faqs">Faqs</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
         <div class="social-links">
-            <a href="#facebook" aria-label="Facebook">
+            <a href="https://www.facebook.com/LibreriaPaginasTalavera" aria-label="Facebook">
                 <i class="fa-brands fa-whatsapp fa-2x"></i>
             </a>
-            <a href="#instagram" aria-label="Instagram">
+            <a href="https://www.instagram.com/libreriapaginas/" aria-label="Instagram">
                 <i class="fa-brands fa-instagram fa-2x"></i>
             </a>
         </div>

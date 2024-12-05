@@ -99,13 +99,21 @@ function renderBooks(booksToRender) {
                         <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
                         <p class="book-price">$${book.price}</p>
                         </a>
-                        <button class="add-to-cart">Agregar a mi bolsa</button>
+                        <button class="add-to-cart" data-id="${book.id}">Agregar a mi bolsa</button>
                     </div>
         `;
         bookGrid.appendChild(bookCard);
 
         if (isObjectInList('favoriteBooks', book.id)) {
             bookCard.querySelector('.favorite-btn i').classList.add('fas');
+        }
+
+        const addToCartButton = bookCard.querySelector('.add-to-cart');
+        if (addToCartButton) {
+            addToCartButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                addObjectToList('cartBooks', addToCartButton.dataset.id, {quantity : 1});
+            });
         }
     });
 }
@@ -311,27 +319,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const cards = slider.querySelectorAll('.book-card');
 
             cards.forEach(card => {
-                // Agregar funcionalidad de vista previa
                 const previewButton = card.querySelector('.preview-button');
                 if (previewButton) {
                     previewButton.addEventListener('click', (e) => {
                         e.preventDefault();
-                        // Implementar la funcionalidad de vista previa aquí
                     });
                 }
 
-                // Agregar funcionalidad de favoritos
-                const favoriteButton = card.querySelector('.favorite-button');
-                if (favoriteButton) {
-                    favoriteButton.addEventListener('click', (e) => {
+                const addToCartButton = card.querySelector('.add-to-cart');
+                if (addToCartButton) {
+                    addToCartButton.addEventListener('click', (e) => {
                         e.preventDefault();
-                        favoriteButton.classList.toggle('active');
-
-                        if (favoriteButton.classList.contains('active')) {
-                            addObjectToList('favoriteBooks', card.dataset.id, {});
-                        } else {
-                            removeObjectFromList('favoriteBooks', card.dataset.id, {});
-                        }
+                        addObjectToList('cartBooks', addToCartButton.dataset.id, {quantity : 1});
                     });
                 }
             });

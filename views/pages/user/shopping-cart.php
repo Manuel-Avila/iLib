@@ -200,7 +200,7 @@
                             const itemElement = document.createElement('div');
                             itemElement.className = 'cart-item';
                             itemElement.innerHTML = `
-                                        <img src="${item.image}" alt="${item.title}">
+                                        <img src="public/img/books/${item.id}.jpg" alt="${item.title}">
                                         <div class="item-details">
                                             <h3 class="item-title">${item.title}</h3>
                                             <p class="item-author">${item.author}</p>

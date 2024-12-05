@@ -70,7 +70,7 @@
                                 <h3><?=$book['title']?></h3>
                                 <p class="author"><?=$book['author']?></p>
                                 <p class="price">$<?=$book['price']?></p>
-                                <button class="add-to-cart">Agregar al carrito</button>
+                                <button class="add-to-cart" data-id="<?= $book['id'] ?>">Agregar al carrito</button>
                             </a>
                         </div>
                     <?php endforeach; ?>
@@ -93,7 +93,7 @@
                                 <h3><?=$book['title']?></h3>
                                 <p class="author"><?=$book['author']?></p>
                                 <p class="price">$<?=$book['price']?></p>
-                                <button class="add-to-cart">Agregar al carrito</button>
+                                <button class="add-to-cart" data-id="<?= $book['id'] ?>">Agregar al carrito</button>
                             </a>
                         </div>
                     <?php endforeach; ?>

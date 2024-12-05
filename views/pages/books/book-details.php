@@ -27,8 +27,8 @@
 
 <html lang="es">
     <head>
-        <?php include_once "../../partials/head.php"; ?>
         <link rel="stylesheet" href="<?= BASE_PATH ?>public/css/book-details.css">
+        <?php include_once "../../partials/head.php"; ?>
     </head>
 
     <body>
