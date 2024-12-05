@@ -14,6 +14,8 @@ RewriteRule ^books/?$ views/pages/books/books.php [L]
 RewriteRule ^faqs/?$ views/pages/faqs.php [L]
 
 RewriteRule ^user/?$ views/pages/user/user.php [L]
+RewriteRule ^favorites/?$ views/pages/user/favorites.php [L]
+RewriteRule ^shopping-cart/?$ views/pages/user/shopping-cart.php [L]
 RewriteRule ^panel/?$ views/pages/admin/panel.php [L]
 
 # CONTROLLERS
