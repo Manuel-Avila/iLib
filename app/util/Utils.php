@@ -18,3 +18,20 @@ function convertDate($dateToConvert) {
         return "Fecha no válida: " . $e->getMessage();
     }
 }
+
+function redirect_back() {
+    header("Location: " . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
+function setErrorRedirect($message) {
+    $_SESSION['errors'][] = $message;
+    redirect_back();
+}
+
+function cleanPostInputs() {
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = trim($_POST[$key]);
+        $_POST[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+    }
+}

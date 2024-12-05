@@ -16,6 +16,6 @@
         ini_set('display_errors', '0');
     }
 
-    if (!defined('BASE_PATH')) define('BASE_PATH',(strpos(getenv("HTTP_USER_AGENT"), "Win") !== FALSE)?"http://localhost/iLib/":"http://localhost:8888/iLib/");
+    if (!defined('BASE_PATH')) define('BASE_PATH', "http://localhost/iLib/");
     
     if (!defined('VIEWS_PATH')) define('VIEWS_PATH', __DIR__ . "/../views");
