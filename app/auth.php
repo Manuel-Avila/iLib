@@ -11,12 +11,12 @@
 
     $api = new ApiHandler('https://library-api-0e3t.onrender.com');
     try {
-        $user = $api->makeRequest('/users/login', 'POST', [
+        $user = $api->makeRequest('/users/login', 'POST', [], [
             "Authorization: Bearer " . $userToken,
             "Content-Type: application/json"
         ]);
 
-        if ($user['role'] === 'user') {
+        if ($user[0]['role'] === 'user') {
             header('Location: ' . BASE_PATH . 'error?code=401');
             return;
         }
