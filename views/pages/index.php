@@ -1,6 +1,7 @@
 <?php
     include_once "../../app/config.php";
     include_once "../../app/BooksController.php";
+    require_once __DIR__ . "/../../app/util/Utils.php";
 
     $bookController = new BooksController();
     $books = $bookController->getBooks();
@@ -65,7 +66,7 @@
                     <?php foreach ($books as $book): ?>
                         <div class="book-card">
                             <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
-                                <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="<?=$book['title']?>">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
                                 <h3><?=$book['title']?></h3>
                                 <p class="author"><?=$book['author']?></p>
                                 <p class="price">$<?=$book['price']?></p>
@@ -88,7 +89,7 @@
                     <?php foreach ($books as $book): ?>
                         <div class="book-card">
                             <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
-                                <img src="<?=BASE_PATH?>public/img/books/<?=$book['id']?>.jpg" alt="<?=$book['title']?>">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
                                 <h3><?=$book['title']?></h3>
                                 <p class="author"><?=$book['author']?></p>
                                 <p class="price">$<?=$book['price']?></p>

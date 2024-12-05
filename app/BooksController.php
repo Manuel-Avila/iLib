@@ -115,16 +115,7 @@ final class BooksController {
 
 function addBook() {
     $booksController = new BooksController();
-    $genreController = new GenreController();
-    $genres = $genreController->getGenres();
-    $genreTitles = [];
-    
-    foreach($genres as $genre) {
-        $genreTitle = $genre['name'];
-        if (isset($_POST[$genreTitle])) {
-            $genreTitles[] = $genreTitle;
-        }
-    }
+    $genres = getGenres();
 
     $bookId = $booksController->createBook(
         $_POST['title'],
@@ -135,7 +126,7 @@ function addBook() {
         (int) $_POST['price'],
         $_POST['release_date'],
         $_POST['isbn'],
-        $genreTitles
+        $genres
     );
 
     if (isset($bookId['id'])) {
@@ -154,8 +145,52 @@ function addBook() {
 
 }
 
-function updateBook() {
-    echo 'updateasdfasdfasdf';
+function updateBook($book_id) {
+    $booksController = new BooksController();
+    $genres = getGenres();
+
+    $booksController->editBook(
+        $book_id,
+        [
+            $_POST['title'],
+            $_POST['author'],
+            $_POST['description'],
+            (int) $_POST['pages'],
+            $_POST['editorial'],
+            (int) $_POST['price'],
+            $_POST['release_date'],
+            $_POST['isbn'],
+            $genres
+        ]
+    );
+
+    if (isset($_FILES['image']) && $_FILES['image']['error']  === UPLOAD_ERR_OK) {
+        deleteImage($book_id);
+        if (saveImage("$book_id")) {
+            $_SESSION['success'] = 'Se actualizo el libro correctamente';
+            header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
+        } else {
+            redirect_back();
+        }
+    }
+    
+    $_SESSION['success'] = 'Se actualizo el libro correctamente';
+    header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
+}
+
+function getGenres() {
+    $genreController = new GenreController();
+    $genres = $genreController->getGenres();
+    $genreTitles = [];
+    
+    foreach($genres as $genre) {
+        $genreTitle = $genre['name'];
+        if (isset($_POST[$genreTitle])) {
+            $genreTitles[] = $genreTitle;
+        }
+    }
+
+    return $genreTitles;
 }
 
 function saveImage($book_id) {
@@ -188,6 +223,14 @@ function saveImage($book_id) {
     return false;
 }
 
+function deleteBook() {
+    $booksController = new BooksController();
+    $booksController->deleteBook($_GET['book_id']);
+    deleteImage($_GET['book_id']);
+    $previousPage = $_SERVER['HTTP_REFERER'];
+    header("Location: $previousPage");
+}
+
 function deleteImage($imageName) {
     $imageName.= getImageExtension($imageName);
 
@@ -199,17 +242,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     cleanPostInputs();
 
     if (isset($_POST['book_id'])) {
-        updateBook();
-        exit();
+        updateBook($_POST['book_id']);
+        die();
     }
 
     addBook();
 } else {
     if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-        $booksController = new BooksController();
-        $booksController->deleteBook($_GET['book_id']);
-        deleteImage($_GET['book_id']);
-        $previousPage = $_SERVER['HTTP_REFERER'];
-        header("Location: $previousPage");
+        deleteBook();
     }
 }

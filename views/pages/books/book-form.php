@@ -1,5 +1,6 @@
 <?php 
     require_once __DIR__ . "/../../../app/config.php";
+    require_once __DIR__ . "/../../../app/util/Utils.php";
     require_once __DIR__ . "/../../../app/BooksController.php";
     require_once __DIR__ . "/../../../app/GenreController.php";
 
@@ -10,15 +11,15 @@
     $genresController = new GenreController();
     $genres = $genresController->getGenres();
     $bookCover = BASE_PATH . 'public/img/book-placeholder.png';
+    $idInput = null;
 
     if (isset($_GET['book_id'])) {
         $title = "Editar Libro";
         $book_id = filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $book = $booksController->getBookById($book_id);
         $releaseDate = explode('T', $book[0]['release_date'])[0];
-        $bookCover = glob(__DIR__ . "/../../../public/img/books/$book_id.*");
-        $bookCover = str_replace(__DIR__ . "/../../..", BASE_PATH, $bookCover[0]);
-        $action_path.="?book_id=$book_id";
+        $bookCover = BASE_PATH . 'public/img/books/' . $book_id . getImageExtension($book_id);
+        $idInput = "<input type='hidden' name='book_id' value='$book_id'>";
     }
 ?>
 
@@ -84,6 +85,8 @@
                         <input name="release_date" id="release_date" required type="date" value="<?=$releaseDate ?? ''?>">
                     </div>
 
+                    <?= $idInput ?? ''?>
+
                     <label id="genres-label">Generos</label>
                     <div class="genres-container">
                         <?php foreach ($genres as $genre): ?>
@@ -98,7 +101,7 @@
                     </div>
                     
                     <div class="form-options">
-                        <a class="button return-button" href="<?=BASE_PATH?>views/pages/books/books.php">Regresar</a>
+                        <a class="button return-button" href="<?=BASE_PATH?>views/pages/admin/panel.php">Regresar</a>
                         <button class="button accept-button" type="submit">Aceptar</button>
                     </div>
                 </div>
