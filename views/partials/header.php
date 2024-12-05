@@ -15,7 +15,7 @@
                 </ul>
             </li>
             <li><a href="#ninos">Autores</a></li>
-            <li><a href="#accesorios">Ayuda</a></li>
+            <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
         <div class="nav-right">
             <div class="search-bar">
@@ -42,7 +42,7 @@
                 </ul>
             </li>
             <li><a href="#productos">Autores</a></li>
-            <li><a href="#oportunidades">Ayuda</a></li>
+            <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
     </div>
 </header>
