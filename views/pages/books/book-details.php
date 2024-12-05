@@ -111,7 +111,7 @@
     </main>
 
     <div class="container-books-section">
-        <?php if(array_count_values($booksAuthor)): ?>
+        <?php if(!empty($booksAuthor)): ?>
             <section class="book-section">
                 <div class="section-header">
                     <h2>Mas libros por el autor</h2>
@@ -145,7 +145,7 @@
             </section>
         <?php endif; ?>
 
-        <?php if(array_count_values($booksSimilar)): ?>
+        <?php if(!empty($booksSimilar)): ?>
             <section class="book-section">
                 <div class="section-header">
                     <h2>Libros relacionados</h2>

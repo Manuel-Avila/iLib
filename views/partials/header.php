@@ -7,14 +7,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="<?=BASE_PATH?>books">Libros</a></li>
-            <li class="dropdown">
-                <a href="#textos">Categorías</a>
-                <ul class="dropdown-content">
-                    <li><a href="#accion">Acción</a></li>
-                    <li><a href="#amor">Amor</a></li>
-                </ul>
-            </li>
-            <li><a href="#ninos">Autores</a></li>
+            <li><a href="#ninos">Saga en descuento</a></li>
             <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
         <div class="nav-right">
@@ -33,15 +26,8 @@
     <div id="mobile-menu" class="mobile-menu">
         <button id="close-menu-btn" aria-label="Cerrar menú">✕</button>
         <ul>
-            <li><a href="#libros">Libros</a></li>
-            <li class="dropdown">
-                <a href="#textos">Categorías</a>
-                <ul class="dropdown-content">
-                    <li><a href="#accion">Acción</a></li>
-                    <li><a href="#amor">Amor</a></li>
-                </ul>
-            </li>
-            <li><a href="#productos">Autores</a></li>
+            <li><a href="<?=BASE_PATH?>books">Libros</a></li>
+            <li><a href="#productos">Saga en descuento</a></li>
             <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
     </div>
