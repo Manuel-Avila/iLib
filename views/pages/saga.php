@@ -237,6 +237,7 @@ include_once "../../app/config.php";
 </head>
 <body>
     <?php include_once "../partials/header.php";?>
+    <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
 
     <div class="hero-section">
         <video autoplay loop muted playsinline id="hero-video">
@@ -254,33 +255,45 @@ include_once "../../app/config.php";
         <section class="book-collection">
             <div class="book-grid">
                 <div class="book">
-                    <img src="/placeholder.svg?height=300&width=200&text=HP1" alt="Harry Potter y la Piedra Filosofal">
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-1.jpg" alt="Harry Potter y la Piedra Filosofal">
                     <h3>La Piedra Filosofal</h3>
                     <p class="price">$299.00</p>
                     <button class="add-to-cart">Agregar al Carrito</button>
                 </div>
                 <div class="book">
-                    <img src="/placeholder.svg?height=300&width=200&text=HP2" alt="Harry Potter y la Cámara Secreta">
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-2.jpg" alt="Harry Potter y la Cámara Secreta">
                     <h3>La Cámara Secreta</h3>
                     <p class="price">$299.00</p>
                     <button class="add-to-cart">Agregar al Carrito</button>
                 </div>
                 <div class="book">
-                    <img src="/placeholder.svg?height=300&width=200&text=HP3" alt="Harry Potter y el Prisionero de Azkaban">
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-3.jpg" alt="Harry Potter y el Prisionero de Azkaban">
                     <h3>El Prisionero de Azkaban</h3>
                     <p class="price">$329.00</p>
                     <button class="add-to-cart">Agregar al Carrito</button>
                 </div>
                 <div class="book">
-                    <img src="/placeholder.svg?height=300&width=200&text=HP3" alt="Harry Potter y el Prisionero de Azkaban">
-                    <h3>El Prisionero de Azkaban</h3>
-                    <p class="price">$329.00</p>
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-4.jpg" alt="Harry Potter y el Cáliz de Fuego">
+                    <h3>El Cáliz de Fuego</h3>
+                    <p class="price">$349.00</p>
                     <button class="add-to-cart">Agregar al Carrito</button>
                 </div>
                 <div class="book">
-                    <img src="/placeholder.svg?height=300&width=200&text=HP3" alt="Harry Potter y el Prisionero de Azkaban">
-                    <h3>El Prisionero de Azkaban</h3>
-                    <p class="price">$329.00</p>
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-5.jpg" alt="Harry Potter y la Orden del Fénix">
+                    <h3>La Orden del Fénix</h3>
+                    <p class="price">$379.00</p>
+                    <button class="add-to-cart">Agregar al Carrito</button>
+                </div>
+                <div class="book">
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-6.jpg" alt="Harry Potter y el Misterio del Príncipe">
+                    <h3>El Misterio del Príncipe</h3>
+                    <p class="price">$359.00</p>
+                    <button class="add-to-cart">Agregar al Carrito</button>
+                </div>
+                <div class="book">
+                    <img src="<?=BASE_PATH?>public/img/saga-books/saga-7.jpg" alt="Harry Potter y las Reliquias de la Muerte">
+                    <h3>Las Reliquias de la Muerte</h3>
+                    <p class="price">$399.00</p>
                     <button class="add-to-cart">Agregar al Carrito</button>
                 </div>
             </div>
@@ -302,6 +315,7 @@ include_once "../../app/config.php";
 
     <?php include_once "../partials/footer.php"; ?>
     <?php include_once "../partials/scripts.php"; ?>
+    <script src="<?=BASE_PATH?>public/js/modal.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -341,7 +355,7 @@ include_once "../../app/config.php";
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const bookTitle = this.parentElement.querySelector('h3').textContent;
-                    alert(`"${bookTitle}" ha sido agregado a tu carrito.`);
+                    showMessageModal('En Proceso', 'Muy pronto podrás comprar estos libros en nuestra tienda en línea.', 'public/img/warning.png');
                 });
             });
 
