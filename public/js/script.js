@@ -400,8 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Books
-
+    // Books page functionality
     if (document.getElementById('book-grid')) {
         applyFilters().then(
             books => {
