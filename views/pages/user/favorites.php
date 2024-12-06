@@ -120,6 +120,7 @@
 </head>
 <body>
 <?php include_once "../../partials/header.php";?>
+<?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
 
 <main class="favorites-page">
     <h1>Mis Favoritos</h1>
@@ -130,6 +131,7 @@
 
 <?php include_once "../../partials/footer.php";?>
 <?php include_once "../../partials/scripts.php";?>
+<script src="<?=BASE_PATH?>public/js/modal.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -200,9 +202,13 @@
             if (e.target.classList.contains('remove-btn')) {
                 const id = e.target.dataset.id;
                 removeItem(id);
+
+                showMessageModal('Libro eliminado', 'El libro se ha eliminado de tus favoritos', 'public/img/logo.png');
             } else if (e.target.classList.contains('add-to-cart-btn')) {
                 const id = e.target.dataset.id;
                 addToCart(id);
+
+                showMessageModal('Libro agregado al carrito', 'El libro se ha agregado al carrito de compras', 'public/img/logo.png');
             }
         });
 
