@@ -93,28 +93,6 @@
         <main>
             <div class="book-grid" id="book-grid">
                 <!-- Los libros se insertarán aquí dinámicamente -->
-                <?php foreach($books as $book): ?>
-                    <div class="book-card">
-                        <a href="<?= BASE_PATH ?>books/<?= $book["id"] ?>" style="text-decoration: none; color: black;">
-                            <div class="book-cover">
-                            <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
-                                <button class="favorite-btn" data-id="<?= $book["id"] ?>">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="book-info">
-                                <h2 class="book-title"><?= $book["title"] ?></h2>
-                                <p class="book-author"><?= $book["author"] ?></p>
-                                <p class="book-publisher"><?= convertDate($book["release_date"]) ?></p>
-                                <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
-                                <p class="book-price">$<?= $book["price"] ?></p>
-                            </div>
-                        </a>
-                        <div class="book-options">
-                            <button class="add-to-cart">Agregar a mi bolsa</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
             </div>
         </main>
     </div>
