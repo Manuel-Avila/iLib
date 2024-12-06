@@ -117,6 +117,14 @@ function addBook() {
     $booksController = new BooksController();
     $genres = getBookGenres();
 
+    if (!validateImage()) {
+        setErrorRedirect('Debes de subir una imagen para poder crear el libro');
+    }
+
+    if (sizeof($genres) === 0) {
+        setErrorRedirect('Debes seleccionar por lo menos un genero');
+    }
+
     $bookId = $booksController->createBook(
         $_POST['title'],
         $_POST['author'],
@@ -148,6 +156,10 @@ function addBook() {
 function updateBook($book_id) {
     $booksController = new BooksController();
     $genres = getBookGenres();
+
+    if (sizeof($genres) === 0) {
+        setErrorRedirect('Debes seleccionar por lo menos un genero');
+    }
 
     $booksController->editBook(
         $book_id,
@@ -235,6 +247,13 @@ function deleteImage($imageName) {
     $imageName.= getImageExtension($imageName);
 
     unlink(__DIR__ . '/../public/img/books/' . $imageName);
+}
+
+function validateImage() {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        return true;
+    }
+    return false;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
