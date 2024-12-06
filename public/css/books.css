@@ -203,6 +203,7 @@
 
 .delete-button {
     background-color: var(--dark-red);
+    height: 40px;
     color: white;
 }
 

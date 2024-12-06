@@ -21,6 +21,13 @@
         $bookCover = BASE_PATH . 'public/img/books/' . $book_id . getImageExtension($book_id);
         $idInput = "<input type='hidden' name='book_id' value='$book_id'>";
     }
+
+    function validateBookGenre($book, $genre) {
+        if (isset($book)) {
+            return in_array($genre, $book[0]['genre']);
+        }
+        return false;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +99,7 @@
                         <?php foreach ($genres as $genre): ?>
                             <div class="genre-container">
                                 <label class="flex-direction-row checkbox-label">
-                                    <input type="checkbox" name="<?=$genre['name']?>">
+                                    <input type="checkbox" name="<?=$genre['name']?>" <?=validateBookGenre($book ?? null, $genre['name']) ? "checked" : ""?>>
                                     <span class="checkbox-custom"></span>
                                     <?=$genre['name']?>
                                 </label>

@@ -115,7 +115,7 @@ final class BooksController {
 
 function addBook() {
     $booksController = new BooksController();
-    $genres = getGenres();
+    $genres = getBookGenres();
 
     $bookId = $booksController->createBook(
         $_POST['title'],
@@ -147,20 +147,20 @@ function addBook() {
 
 function updateBook($book_id) {
     $booksController = new BooksController();
-    $genres = getGenres();
+    $genres = getBookGenres();
 
     $booksController->editBook(
         $book_id,
         [
-            $_POST['title'],
-            $_POST['author'],
-            $_POST['description'],
-            (int) $_POST['pages'],
-            $_POST['editorial'],
-            (int) $_POST['price'],
-            $_POST['release_date'],
-            $_POST['isbn'],
-            $genres
+            'title' => $_POST['title'],
+            'author' => $_POST['author'],
+            'description' => $_POST['description'],
+            'pages' => (int) $_POST['pages'],
+            'editorial' => $_POST['editorial'],
+            'price' => (int) $_POST['price'],
+            'release_date' => $_POST['release_date'],
+            'isbn' => $_POST['isbn'],
+            'genre' => $genres
         ]
     );
 
@@ -178,7 +178,7 @@ function updateBook($book_id) {
     header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
 }
 
-function getGenres() {
+function getBookGenres() {
     $genreController = new GenreController();
     $genres = $genreController->getGenres();
     $genreTitles = [];

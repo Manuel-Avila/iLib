@@ -50,6 +50,11 @@ main {
     background-color: #eee;
 }
 
+.form-fields input:focus, .form-fields textarea:focus {
+    outline: 3px solid var(--dark-red);
+    border-style: none;
+}
+
 .image-field {
     display: flex;
     flex-direction: column;
