@@ -75,12 +75,30 @@ function convertDate(dateToConvert) {
 }
 
 
+
+
 // BOOKS
+function getSearchParam() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('search') || '';
+}
+
 function renderBooks(booksToRender) {
     const bookGrid = document.getElementById('book-grid');
     bookGrid.innerHTML = '';
 
-    booksToRender.forEach(book => {
+    const searchQuery = getSearchParam().toLowerCase();
+
+    const filteredBooks = booksToRender.filter(book => {
+        return searchQuery !== '' && book.title.toLowerCase().includes(searchQuery) || book.description.toLowerCase().includes(searchQuery) || book.author.toLowerCase().includes(searchQuery); // Filtrar los libros que contienen la cadena de búsqueda.
+    });
+
+    if (filteredBooks.length === 0) {
+        bookGrid.innerHTML = '<p>No se encontraron libros que coincidan con la búsqueda.</p>';
+        return;
+    }
+
+    filteredBooks.forEach(book => {
         const bookCard = document.createElement('div');
 
         bookCard.className = 'book-card';
@@ -98,9 +116,9 @@ function renderBooks(booksToRender) {
                         <p class="book-publisher">${convertDate(book.release_date)}</p>
                         <p class="book-format"><i class="fas fa-book"></i> Pasta dura</p>
                         <p class="book-price">$${book.price}</p>
-                        </a>
-                        <button class="add-to-cart" data-id="${book.id}">Agregar a mi bolsa</button>
-                    </div>
+                    </a>
+                    <button class="add-to-cart" data-id="${book.id}">Agregar a mi bolsa</button>
+                </div>
         `;
         bookGrid.appendChild(bookCard);
 
@@ -112,7 +130,7 @@ function renderBooks(booksToRender) {
         if (addToCartButton) {
             addToCartButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                addObjectToList('cartBooks', addToCartButton.dataset.id, {quantity : 1});
+                addObjectToList('cartBooks', addToCartButton.dataset.id, { quantity: 1 });
             });
         }
     });
@@ -238,6 +256,18 @@ document.addEventListener('DOMContentLoaded', function() {
             rightBtn.addEventListener('click', () => handleBookSliderScroll(slider, 'right'));
         });
     }
+
+    document.querySelector('#search-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const searchQuery = document.querySelector('#search-input').value.trim();
+
+        if (searchQuery) {
+            window.location.href = 'books?search=' + searchQuery;
+        } else {
+            window.location.href = 'books';
+        }
+    });
 
     // Sticky nav functionality
     function handleStickyNav() {

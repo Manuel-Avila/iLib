@@ -1,6 +1,5 @@
 <?php
     include_once "../../app/config.php";
-    include_once "../../app/auth.php";
 ?>
 
 <!DOCTYPE html>

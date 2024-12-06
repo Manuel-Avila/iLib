@@ -12,8 +12,8 @@
         </ul>
         <div class="nav-right">
             <div class="search-bar">
-                <input type="text" placeholder="¿Qué estás buscando?">
-                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input id="search-input" type="text" placeholder="¿Qué estás buscando?">
+                <button id="search-btn" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div class="icons">
                 <a href="<?=BASE_PATH?>favorites" aria-label="Favoritos"><i class="fa-solid fa-star"></i></a>

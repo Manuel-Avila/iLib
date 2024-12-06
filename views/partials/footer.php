@@ -26,7 +26,7 @@
     <div class="footer-bottom">
         <div class="social-links">
             <a href="https://www.facebook.com/LibreriaPaginasTalavera" aria-label="Facebook">
-                <i class="fa-brands fa-whatsapp fa-2x"></i>
+                <i class="fa-brands fa-facebook fa-2x"></i>
             </a>
             <a href="https://www.instagram.com/libreriapaginas/" aria-label="Instagram">
                 <i class="fa-brands fa-instagram fa-2x"></i>
