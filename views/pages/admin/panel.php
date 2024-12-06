@@ -10,6 +10,16 @@
     $modalMessage = 'Al presionar el boton aceptar no sera posible recuperar el libro eliminado';
     $genreController = new GenreController();
     $genres = $genreController->getGenres();
+
+    //Mostrar mensaje de exito cuando se agrego o actualizo un libro
+    if (isset($_SESSION['success'])) {
+        
+        $successMessage = $_SESSION['success'];
+        $imgPath = BASE_PATH . 'public/img/success.png';
+        $success = "<script>showMessageModal('Exito!!', '$successMessage', '$imgPath');</script>";
+
+        unset($_SESSION['success']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +31,7 @@
 </head>
 <body>
     <?php include_once "../../partials/header.php"; ?>
+    <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
     <?php include_once VIEWS_PATH . "/partials/confirm-modal.php" ?>
 <div class="container">
     <!-- Desktop Sidebar -->
@@ -173,6 +184,7 @@
 </div>
 
     <?php include_once "../../partials/footer.php"; ?>
-    
+    <script src="<?=BASE_PATH?>public/js/modal.js"></script>
+    <?= $success ?? '' ?>
 </body>
 </html>

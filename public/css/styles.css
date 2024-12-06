@@ -18,7 +18,7 @@ body {
     color: #333;
 }
 
-/* Confirm-Modal */
+/* Modals */
 
 .dark-overlay {
     position: fixed;
@@ -36,7 +36,7 @@ body {
     justify-content: center;
 }
 
-.confirm-modal {
+.modal-box {
     max-width: 500px;
     min-width: 300px;
     width: 70%;
@@ -69,14 +69,23 @@ body {
     background-color: var(--gray-hover);
 }
 
-.confirm-modal button {
+.modal-box button {
     margin-top: 10px;
     width: 80%;
     transition: transform 0.3s;
 }
 
-.confirm-modal button:hover {
+.modal-box button:hover {
     transform: translateY(-2px);
+}
+
+#accept-message-button {
+    background-color: var(--dark-red);
+    color: white;
+}
+
+#accept-message-button:hover {
+    background-color: var(--red-hover);
 }
 
 /* Header y navegación */

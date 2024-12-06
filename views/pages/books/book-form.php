@@ -22,6 +22,16 @@
         $idInput = "<input type='hidden' name='book_id' value='$book_id'>";
     }
 
+    //Mostrar errores en un modal
+    if (isset($_SESSION['errors'])) {
+        
+        $errorMessage = $_SESSION['errors'][0];
+        $imgPath = BASE_PATH . 'public/img/warning.png';
+        $error = "<script>showMessageModal('Error', '$errorMessage', '$imgPath');</script>";
+
+        unset($_SESSION['errors']);
+    }
+
     function validateBookGenre($book, $genre) {
         if (isset($book)) {
             return in_array($genre, $book[0]['genre']);
@@ -39,7 +49,8 @@
     </head>
     <body>
         <?php include_once VIEWS_PATH . "/partials/header.php"; ?>
-        
+        <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
+
         <main>
             <form action="<?=$action_path?>" class="form" method="post" enctype="multipart/form-data">
                 <div class="image-field">
@@ -119,5 +130,7 @@
         <?php include_once VIEWS_PATH . "/partials/scripts.php"; ?>
 
         <script src="<?=BASE_PATH?>public/js/book-form.js"></script>
+        <script src="<?=BASE_PATH?>public/js/modal.js"></script>
+        <?= $error ?? '' ?>
     </body>
 </html>
