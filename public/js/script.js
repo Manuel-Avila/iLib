@@ -271,6 +271,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    const searchBtn = document.getElementById('search-btn-mobile');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const searchQuery = document.getElementById('search-input-mobile').value.trim();
+
+            if (searchQuery) {
+                window.location.href = 'books?search=' + searchQuery;
+            } else {
+                window.location.href = 'books';
+            }
+        });
+    }
+
     // Sticky nav functionality
     function handleStickyNav() {
         const nav = document.getElementById('sticky-nav');

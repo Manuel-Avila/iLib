@@ -36,8 +36,8 @@
             </section>
 
             <div class="mobile-search-bar">
-                <input type="text" placeholder="¿Qué estás buscando?">
-                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input id="search-input-mobile" type="text" placeholder="¿Qué estás buscando?">
+                <button id="search-btn-mobile" class="search-btn" ><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
             <section class="categories">
