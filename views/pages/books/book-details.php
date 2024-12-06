@@ -19,7 +19,7 @@
     }
 
     $book = $book[0];
-    $booksAuthor = $bookController->getBooksByAuthor($id);
+    $booksAuthor = $bookController->getBooksByAuthor($book["author"]);
     $booksSimilar = $bookController->getBooksSimilarById($id);
 ?>
 
@@ -123,6 +123,8 @@
                 </div>
                 <div class="book-slider">
                     <?php foreach ($booksAuthor as $book): ?>
+                        <?php if ($book['id'] == $id) continue; ?>
+
                         <div class="book-card">
                             <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
                                 <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
