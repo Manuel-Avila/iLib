@@ -99,6 +99,29 @@
                     <?php endforeach; ?>
                 </div>
             </section>
+
+            <section class="book-section">
+                <div class="section-header">
+                    <h2>Mas vendidos</h2>
+                    <div class="scroll-buttons">
+                        <button class="scroll-left" aria-label="Desplazar a la izquierda">←</button>
+                        <button class="scroll-right" aria-label="Desplazar a la derecha">→</button>
+                    </div>
+                </div>
+                <div class="book-slider">
+                    <?php foreach ($books as $book): ?>
+                        <div class="book-card">
+                            <a href="<?= BASE_PATH ?>books/<?= $book['id'] ?>" style="text-decoration: none">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
+                                <h3><?=$book['title']?></h3>
+                                <p class="author"><?=$book['author']?></p>
+                                <p class="price">$<?=$book['price']?></p>
+                                <button class="add-to-cart" data-id="<?= $book['id'] ?>">Agregar al carrito</button>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </section>
         </main>
 
         <?php include_once "../partials/footer.php"; ?>

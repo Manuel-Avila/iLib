@@ -12,7 +12,7 @@
             <h3>Descubrir</h3>
             <ul>
                 <li><a href="<?=BASE_PATH?>books">Libros</a></li>
-                <li><a href="#categorias">Saga semanal</a></li>
+                <li><a href="<?=BASE_PATH?>saga">Saga semanal</a></li>
                 <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
             </ul>
         </div>
