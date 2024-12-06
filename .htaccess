@@ -1,4 +1,4 @@
-Options +FollowSymLinks -MultiViews -Indexes
+Options +FollowSymLinks -MultiViews
 RewriteEngine on
 
 # PAGES
