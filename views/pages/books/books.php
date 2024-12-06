@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php include_once "../../partials/header.php"; ?>
-    <?php include_once VIEWS_PATH . "/partials/confirm-modal.php" ?>
+    <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
 <div class="container">
     <!-- Desktop Sidebar -->
     <aside class="desktop-sidebar">
@@ -146,7 +146,7 @@
         </div>
     </div>
 </div>
-
+    <script src="<?=BASE_PATH?>public/js/modal.js"></script>
     <?php include_once "../../partials/footer.php"; ?>
     <?php include_once "../../partials/scripts.php"; ?>
 </body>

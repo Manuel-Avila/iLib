@@ -16,6 +16,7 @@
 
     <body>
         <?php include_once "../partials/header.php";?>
+        <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
 
         <main>
             <section class="hero-slider">
@@ -125,6 +126,7 @@
         </main>
 
         <?php include_once "../partials/footer.php"; ?>
+        <script src="<?=BASE_PATH?>public/js/modal.js"></script>
         <?php include_once "../partials/scripts.php"; ?>
     </body>
 </html>

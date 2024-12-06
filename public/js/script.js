@@ -131,6 +131,8 @@ function renderBooks(booksToRender) {
             addToCartButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 addObjectToList('cartBooks', addToCartButton.dataset.id, { quantity: 1 });
+
+                showMessageModal('Libro agregado al carrito', 'El libro se ha agregado al carrito de compras', 'public/img/logo.png');
             });
         }
     });
@@ -361,6 +363,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     addToCartButton.addEventListener('click', (e) => {
                         e.preventDefault();
                         addObjectToList('cartBooks', addToCartButton.dataset.id, {quantity : 1});
+
+                        showMessageModal('Libro agregado al carrito', 'El libro se ha agregado al carrito de compras', 'public/img/logo.png');
                     });
                 }
             });

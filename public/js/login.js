@@ -49,11 +49,10 @@ if (loginBt) {
             document.getElementById("email").value = "";
             document.getElementById("password").value = "";
 
-            alertify.alert('Exito', 'Se inicio sesion correctamente.', () => {
-                window.location.reload();
-            });
+            showMessageModal("Exito", "Se inicio sesion correctamente.", 'public/img/success.png');
+            window.location.reload();
         } catch (error) {
-            alertify.alert('Error', 'Correo o contraseña incorrectos.');
+            showMessageModal("Error", "Correo o contraseña incorrectos.", 'public/img/warning.png');
         }
     });
 }
@@ -100,9 +99,9 @@ if (registerBt) {
             document.getElementById("password").value = "";
             document.getElementById("confirm-password").value = "";
 
-            alertify.alert('Exito', 'Se registro correctamente.');
+            showMessageModal("Exito", "Se registro correctamente.", 'public/img/success.png');
         } catch (error) {
-            alertify.alert('Error', 'Algo salio mal.');
+            showMessageModal("Error", "Algo salio mal.", 'public/img/warning.png');
         }
     });
 }
@@ -136,11 +135,10 @@ if (googleBt) {
 
             await response.json();
             setCookie("user_token", idToken);
-            alertify.alert('Exito', 'Se inicio sesion correctamente.', () => {
-                window.location.reload();
-            });
+            showMessageModal("Exito", "Se inicio sesion correctamente.", 'public/img/success.png');
+            window.location.reload();
         } catch (error) {
-            alertify.alert('Error', 'Algo salio mal.');
+            showMessageModal("Error", "Algo salio mal.", 'public/img/warning.png');
         }
     });
 }
@@ -153,18 +151,18 @@ if (forgotPassword) {
             const email = document.getElementById("email").value;
 
             if (!email) {
-                alertify.alert('Error', 'Ingresa el correo por favor.');
+                showMessageModal("Error", "Ingrese un correo.", 'public/img/warning.png');
                 return;
             }
 
             await sendPasswordResetEmail(auth, email)
                 .then(() => {
-                    alertify.alert('Exito', 'Se envio un correo para restablecer tu contraseña.');
+                    showMessageModal("Exito", "Se envio un correo para restablecer tu contraseña.", 'public/img/success.png');
 
                     document.getElementById("email").value = "";
                 })
                 .catch((error) => {
-                    alertify.alert('Error', 'Error al enviar el correo para restablecer tu contraseña.');
+                    showMessageModal("Error", "Correo no registrado.", 'public/img/warning.png');
                 });
         });
 }

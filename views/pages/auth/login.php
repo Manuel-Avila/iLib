@@ -10,9 +10,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Librería</title>
+    <?php include_once VIEWS_PATH . "/partials/head.php"; ?>
     <style>
         * {
             box-sizing: border-box;
@@ -197,17 +195,10 @@
             }
         }
     </style>
-
-    <!-- Enlace al CSS de Alertify.js -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-
-    <!-- Enlace a los estilos temáticos de Alertify.js (opcional) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-
-    <!-- Enlace al JavaScript de Alertify.js -->
-    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </head>
 <body>
+    <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
+
     <div class="login-container">
         <img src="<?=BASE_PATH?>public/img/logo.png" alt="Logo" class="logo">
         <h1>Iniciar Sesión</h1>
@@ -252,6 +243,7 @@
         </button>
     </div>
 
+    <script src="<?=BASE_PATH?>public/js/modal.js"></script>
     <script type="module" src="<?=BASE_PATH?>public/js/login.js"></script>
 </body>
 </html>
