@@ -12,6 +12,7 @@ RewriteRule ^books/(.+)/?$ views/pages/books/book-details.php?id=$1 [L]
 RewriteRule ^books/?$ views/pages/books/books.php [L]
 
 RewriteRule ^faqs/?$ views/pages/faqs.php [L]
+RewriteRule ^saga/?$ views/pages/saga.php [L]
 
 RewriteRule ^user/?$ views/pages/user/user.php [L]
 RewriteRule ^favorites/?$ views/pages/user/favorites.php [L]

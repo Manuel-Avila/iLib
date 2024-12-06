@@ -7,7 +7,7 @@
         </div>
         <ul class="nav-links">
             <li><a href="<?=BASE_PATH?>books">Libros</a></li>
-            <li><a href="#ninos">Saga en descuento</a></li>
+            <li><a href="<?=BASE_PATH?>saga">Saga Semanal</a></li>
             <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
         <div class="nav-right">
@@ -27,7 +27,7 @@
         <button id="close-menu-btn" aria-label="Cerrar menú">✕</button>
         <ul>
             <li><a href="<?=BASE_PATH?>books">Libros</a></li>
-            <li><a href="#productos">Saga en descuento</a></li>
+            <li><a href="<?=BASE_PATH?>saga">Saga Semanal</a></li>
             <li><a href="<?=BASE_PATH?>faqs">Ayuda</a></li>
         </ul>
     </div>
