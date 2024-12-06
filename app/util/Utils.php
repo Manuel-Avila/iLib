@@ -41,3 +41,12 @@ function getImageExtension($imageName) {
     $image = $image[0];
     return "." . pathinfo($image, PATHINFO_EXTENSION);
 }
+
+function getBookImageFullName($imageName) {
+    $image = glob(__DIR__ . "/../../public/img/books/$imageName.*");
+    if (count($image) > 0) {
+        return basename($image[0]);
+    }
+
+    return "fallback.png";
+}

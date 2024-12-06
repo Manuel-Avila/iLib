@@ -32,7 +32,7 @@
 <body>
     <?php include_once "../../partials/header.php"; ?>
     <?php include_once VIEWS_PATH . "/partials/message-modal.php"; ?>
-    <?php include_once VIEWS_PATH . "/partials/confirm-modal.php" ?>
+    <?php include_once VIEWS_PATH . "/partials/confirm-modal.php"; ?>
 <div class="container">
     <!-- Desktop Sidebar -->
     <aside class="desktop-sidebar">
@@ -110,7 +110,7 @@
                     <div class="book-card">
                         <a href="<?= BASE_PATH ?>books/<?= $book["id"] ?>" style="text-decoration: none; color: black;">
                             <div class="book-cover">
-                                <img src="<?= BASE_PATH ?>public/img/books/<?= $book["id"] . getImageExtension($book["id"])?>" alt="<?= $book["title"] ?>">
+                                <img src="<?= BASE_PATH ?>public/img/books/<?= getBookImageFullName($book["id"]) ?>" alt="<?= $book["title"] ?>">
                                 <button class="favorite-btn" data-id="<?= $book["id"] ?>">
                                     <i class="far fa-heart"></i>
                                 </button>
