@@ -203,7 +203,7 @@
                 const id = e.target.dataset.id;
                 removeItem(id);
 
-                showMessageModal('Libro eliminado', 'El libro se ha eliminado de tus favoritos', 'public/img/logo.png');
+                showMessageModal('Libro eliminado', 'El libro se ha eliminado de tus favoritos', 'public/img/success.png');
             } else if (e.target.classList.contains('add-to-cart-btn')) {
                 const id = e.target.dataset.id;
                 addToCart(id);

@@ -178,7 +178,7 @@
                 const id = addToCartButton.dataset.id;
                 addObjectToList('cartBooks', id, { quantity: count });
 
-                showMessageModal('¡Libro agregado!', 'El libro se ha agregado a tu bolsa de compras.', '../public/img/logo.png');
+                showMessageModal('¡Libro agregado!', 'El libro se ha agregado a tu bolsa de compras.', '../public/img/success.png');
             });
         }
 
@@ -189,7 +189,7 @@
                 const id = favoriteButton.dataset.id;
                 addObjectToList('favoriteBooks', id, {});
 
-                showMessageModal('¡Libro agregado!', 'El libro se ha agregado a tus favoritos.', '../public/img/logo.png');
+                showMessageModal('¡Libro agregado!', 'El libro se ha agregado a tus favoritos.', '../public/img/success.png');
             });
         }
 
