@@ -128,7 +128,6 @@
         </main>
 
         <?php include_once VIEWS_PATH . "/partials/footer.php"; ?>
-        <?php include_once VIEWS_PATH . "/partials/scripts.php"; ?>
 
         <script src="<?=BASE_PATH?>public/js/book-form.js"></script>
         <script src="<?=BASE_PATH?>public/js/modal.js"></script>

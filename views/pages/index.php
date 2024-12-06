@@ -27,10 +27,10 @@
                         <img src="<?=BASE_PATH?>public/img/poster/poster.jpg" alt="Promoción de libro 1">
                     </div>
                     <div class="slide">
-                        <img src="<?=BASE_PATH?>public/img/poster/poster2.jpg" alt="Promoción de libro 2">
+                        <img src="<?=BASE_PATH?>public/img/poster/poster2.webp" alt="Promoción de libro 2">
                     </div>
                     <div class="slide">
-                        <img src="<?=BASE_PATH?>public/img/poster/poster3.jpg" alt="Promoción de libro 3">
+                        <img src="<?=BASE_PATH?>public/img/poster/poster3.webp" alt="Promoción de libro 3">
                     </div>
                 </div>
             </section>
