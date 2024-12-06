@@ -1,8 +1,9 @@
-<?php 
+<?php
     require_once __DIR__ . "/../../../app/config.php";
     require_once __DIR__ . "/../../../app/util/Utils.php";
     require_once __DIR__ . "/../../../app/BooksController.php";
     require_once __DIR__ . "/../../../app/GenreController.php";
+    include_once "../../../app/auth.php";
 
     $title = "Agregar Libro";
     $action_path = BASE_PATH . 'app/BooksController.php';
@@ -13,9 +14,9 @@
     $bookCover = BASE_PATH . 'public/img/book-placeholder.png';
     $idInput = null;
 
-    if (isset($_GET['book_id'])) {
+    if (isset($_GET['id'])) {
         $title = "Editar Libro";
-        $book_id = filter_input(INPUT_GET, 'book_id', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $book_id = $_GET['id'];
         $book = $booksController->getBookById($book_id);
         $releaseDate = explode('T', $book[0]['release_date'])[0];
         $bookCover = BASE_PATH . 'public/img/books/' . $book_id . getImageExtension($book_id);
@@ -119,7 +120,7 @@
                     </div>
                     
                     <div class="form-options">
-                        <a class="button return-button" href="<?=BASE_PATH?>views/pages/admin/panel.php">Regresar</a>
+                        <a class="button return-button" href="<?=BASE_PATH?>panel">Regresar</a>
                         <button class="button accept-button" type="submit">Aceptar</button>
                     </div>
                 </div>

@@ -17,7 +17,10 @@ RewriteRule ^saga/?$ views/pages/saga.php [L]
 RewriteRule ^user/?$ views/pages/user/user.php [L]
 RewriteRule ^favorites/?$ views/pages/user/favorites.php [L]
 RewriteRule ^shopping-cart/?$ views/pages/user/shopping-cart.php [L]
+
 RewriteRule ^panel/?$ views/pages/admin/panel.php [L]
+RewriteRule ^panel/create?$ views/pages/books/book-form.php [L]
+RewriteRule ^panel/edit/(.+)?$ views/pages/books/book-form.php?id=$1 [L]
 
 # CONTROLLERS
 RewriteRule ^logout$ app/logout.php

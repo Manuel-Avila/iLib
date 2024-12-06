@@ -3,6 +3,7 @@
     include_once "../../../app/BooksController.php";
     include_once "../../../app/GenreController.php";
     require_once __DIR__ . "/../../../app/util/Utils.php";
+    include_once "../../../app/auth.php";
 
     $bookController = new BooksController();
     $controllerPath = '';
@@ -102,7 +103,7 @@
                 </select>
                 <button id="filter-button">Filtrar Por <i class="fas fa-sliders-h"></i></button>
             </div>
-            <a id="add-book-button" class="button" href="<?= BASE_PATH ?>views/pages/books/book-form.php">Agregar Libro</a>
+            <a id="add-book-button" class="button" href="<?= BASE_PATH ?>panel/create">Agregar Libro</a>
         </header>
         <main>
             <div class="book-grid" id="book-grid">
@@ -124,7 +125,7 @@
                             </div>
                         </a>
                         <div class="book-options">
-                            <a class="button edit-button" id="edit-button" href="<?= BASE_PATH ?>views/pages/books/book-form.php?book_id=<?= $book["id"]; ?>">Editar</a>
+                            <a class="button edit-button" id="edit-button" href="<?= BASE_PATH ?>panel/edit/<?= $book["id"]; ?>">Editar</a>
                             <button onclick="sendToUrl('<?= BASE_PATH ?>app/BooksController.php?action=delete&book_id=<?=$book['id']?>');" class="button delete-button">Eliminar</button>
                         </div>
                     </div>

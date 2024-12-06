@@ -146,7 +146,7 @@ function addBook() {
 
     if (saveImage("$bookId")) {
         $_SESSION['success'] = 'Se agrego el libro correctamente';
-        header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
+        header("Location: " . BASE_PATH . "panel");
     } else {
         redirect_back();
     }
@@ -180,14 +180,14 @@ function updateBook($book_id) {
         deleteImage($book_id);
         if (saveImage("$book_id")) {
             $_SESSION['success'] = 'Se actualizo el libro correctamente';
-            header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
+            header("Location: " . BASE_PATH . "panel");
         } else {
             redirect_back();
         }
     }
     
     $_SESSION['success'] = 'Se actualizo el libro correctamente';
-    header("Location: " . BASE_PATH . "views/pages/admin/panel.php");
+    header("Location: " . BASE_PATH . "panel");
 }
 
 function getBookGenres() {
